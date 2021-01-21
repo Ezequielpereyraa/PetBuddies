@@ -1,5 +1,5 @@
 import express from "express";
-import Owner from "../models/Owner";
+import Owner from "../models/User";
 const server = express.Router();
 
 server.post("/", async (req, res) => {

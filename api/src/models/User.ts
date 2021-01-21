@@ -32,15 +32,10 @@ const OwnerSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-
   zona: {
     type: String,
     required: true,
     trim: true,
-  },
-  isAdmin: {
-    type: Boolean,
-    required: true,
   },
   dni: {
     type: Number,
@@ -52,6 +47,21 @@ const OwnerSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  role: {
+    type: String,
+    enum: ['Owner', 'Walker', 'Admin'],
+    required: true,
+    default: 'Owner'
+  },
+  CUIT: {
+    type: String
+  },
+  workZone: {
+    type: String
+  },
+  workHours: {
+    type: String
+  }
 });
 
 const Owner = mongoose.model("Owner", OwnerSchema);
