@@ -1,13 +1,26 @@
 import express from "express";
 import User from "../models/User";
+import Pet from "../models/Pet";
 const server = express.Router();
 
+// Trae solo USER's
 server.get('/', async(req,res)=>{
   try{
     const owners = await User.find({role:'Owner'})
     res.send(owners)
   }catch(err){
     res.send(err)
+  }
+})
+
+// Trae tanto al USER como a sus respectivas PET's
+server.get("/:id", async(req,res) => {
+  try {
+    const owner = await User.findById(req.params.id);
+    const pets = await Pet.find({ownerId:req.params.id});
+    res.send({owner,pets})
+  } catch (error) {
+    res.send(error)
   }
 })
 
