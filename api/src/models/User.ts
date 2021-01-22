@@ -63,7 +63,11 @@ const UserSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    
+  //   pets: [{ 
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "Pet"
+  //  }]
+
   },
   { timestamps:true,
     versionKey: false

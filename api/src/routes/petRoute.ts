@@ -2,6 +2,7 @@ import express from "express";
 import Pet from "../models/Pet";
 const server = express.Router();
 
+// Tener previamente el ID del OWNER
 server.post("/", async ( req, res ) => {
   try {
     const pet = await Pet.create(req.body);
