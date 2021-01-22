@@ -2,6 +2,8 @@ import morgan from "morgan";
 import express from "express";
 import ownerRouter from './owner';
 import walkerRouter from './Walker';
+import petRoute from "./petRoute";
+
 
 const app = express.Router();
 app.use(express.json()); // Body Parser
@@ -21,5 +23,6 @@ app.use((req, res, next) => {
 });
 app.use ('/owners', ownerRouter);
 app.use('/walkers', walkerRouter)
+app.use ('/pet', petRoute);
 
 export default app;
