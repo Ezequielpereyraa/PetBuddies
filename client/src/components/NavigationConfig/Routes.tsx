@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Prueba from '../Prueba';
 import WalkerCard from '../WalkerCard';
+import WalkerProfile from '../WalkerProfile';
 import UserPannel from '../UserPannel';
 import UserFormScreen from '../UserFormScreen/UserFormScreen';
 

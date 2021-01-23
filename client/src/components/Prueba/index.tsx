@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {Icon } from 'react-native-elements'
 import {RouteStackParamList} from '../NavigationConfig/types'
-import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux';
 import {getWalkers} from '../../redux/reducers/walker/actions'
 
 

@@ -6,6 +6,7 @@ import {DrawerNavigationProp} from '@react-navigation/drawer';
 export type RootStackParamList = {
     WalkerCard: undefined;
     Prueba: undefined;
+    WalkerProfile: undefined;
     UserPannel: undefined;
     UserFormScreen:undefined;
     HomeScreen: undefined;
