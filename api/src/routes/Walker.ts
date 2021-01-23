@@ -9,7 +9,17 @@ server.get('/', async(req,res)=>{
   }catch(err){
     res.send(err)
   }
-})
+});
+
+server.get('/:zone', async (req, res) => {
+  const { zone } = req.params;
+  try {
+    const walkers = await User.find({ role: 'Walker', workZone: zone });
+    res.send(walkers);
+  } catch(err) {
+    res.send(err);
+  }
+});
 
 server.post("/", async (req, res) => {
   try {

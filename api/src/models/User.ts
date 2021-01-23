@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import * as moment from "moment";
+import moment from "moment";
 import "moment/locale/es";
 
 const UserSchema = new mongoose.Schema(
@@ -67,11 +67,13 @@ const UserSchema = new mongoose.Schema(
   //     type: mongoose.Schema.Types.ObjectId,
   //     ref: "Pet"
   //  }]
+    date: {
+      type: String,
+      default: moment().format('L') + ' ' + moment().format('LTS')
+    }
 
   },
-  { timestamps:true,
-    versionKey: false
-  }
+  { timestamps:true, versionKey: false }
 );
 
 const User = mongoose.model("User", UserSchema);
