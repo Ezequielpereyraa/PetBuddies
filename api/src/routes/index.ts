@@ -1,7 +1,7 @@
 import morgan from "morgan";
 import express from "express";
 import ownerRouter from './owner';
-import walkerRouter from './Walker';
+import walkerRouter from './walker';
 import petRoute from "./petRoute";
 
 
@@ -23,6 +23,6 @@ app.use((req, res, next) => {
 });
 app.use ('/owners', ownerRouter);
 app.use('/walkers', walkerRouter)
-app.use ('/pet', petRoute);
+app.use ('/pets', petRoute);
 
 export default app;

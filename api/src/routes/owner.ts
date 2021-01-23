@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/User";
 import Pet from "../models/Pet";
+const bcrypt = require('bcrypt');
 const server = express.Router();
 
 // Trae solo USER's
@@ -25,9 +26,13 @@ server.get("/:id", async(req,res) => {
 })
 
 server.post("/", async (req, res) => {
+  const { password } = req.body;
   try {
-    const owner = await User.create(req.body); //pasan los del registro (Name, lastName, password, email, zona)
+    const pass: string = bcrypt.hashSync(password, 10) // Hasheo de la contraseña
+    const owner: any = await User.create(req.body); //pasan los del registro (Name, lastName, password, email, zona)
+    owner.password = pass 
     await owner.save();
+    // const prueba = bcrypt.compareSync(password, owner.password)
     res.send(owner);
   } catch (err) {
     res.json(err);
@@ -36,25 +41,23 @@ server.post("/", async (req, res) => {
 
 server.put('/:id', async(req,res)=>{
   const {id}=req.params;
- 
   try{
-    const owner = await User.findByIdAndUpdate(
-      {_id: id}, req.body,{new:true})
+    const owner = await User.findByIdAndUpdate({_id: id}, req.body, {new:true})
     res.send(owner)
-  }catch(err){
+  } catch(err) {
     res.send(err)
   }
 })
 
-    // name: "   juan carlos    ",
-    // lastname: "    del     valle ",
-    // email: "javisawasss@gmail.com",
-    // password: "javier",
-    // cellphone: 4213213,
-    // address: "jkashdajshds",
-    // zona: "norte",
-    // isAdmin: true,
-    // dni: 12321321,
-    // photo: "cualquiercosa",
+    // "name": "   juan carlos    ",
+    // "lastname": "    del     valle ",
+    // "email": "javisawasss@gmail.com",
+    // "password": "javier",
+    // "cellphone": 4213213,
+    // "address": "jkashdajshds",
+    // "zona": "norte",
+    // "isAdmin": true,
+    // "dni": 12321321,
+    // "photo": "cualquiercosa",
 
 export default server;
