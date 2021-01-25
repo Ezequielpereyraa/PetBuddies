@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const PetSchema = new mongoose.Schema(
   {
@@ -7,7 +7,7 @@ const PetSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    age:{
+    age: {
       type: Number,
       required: true,
     },
@@ -43,7 +43,7 @@ const PetSchema = new mongoose.Schema(
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Owner",
+      ref: "User",
     },
   },
   { timestamps: true, versionKey: false }

@@ -2,21 +2,21 @@ import express from "express";
 import User from "../models/User";
 const server = express.Router();
 
-server.get('/', async(req,res)=>{
-  try{
-    const walkers= await User.find({role:'Walker'})
-    res.send(walkers)
-  }catch(err){
-    res.send(err)
+server.get("/", async (req, res) => {
+  try {
+    const walkers = await User.find({ role: "Walker" });
+    res.send(walkers);
+  } catch (err) {
+    res.send(err);
   }
 });
 
-server.get('/:zone', async (req, res) => {
+server.get("/:zone", async (req, res) => {
   const { zone } = req.params;
   try {
-    const walkers = await User.find({ role: 'Walker', workZone: zone });
+    const walkers = await User.find({ role: "Walker", workZone: zone });
     res.send(walkers);
-  } catch(err) {
+  } catch (err) {
     res.send(err);
   }
 });
