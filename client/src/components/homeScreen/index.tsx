@@ -1,170 +1,96 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { View, Text, FlatList, SafeAreaView } from 'react-native';
-import {  Icon, Avatar, Card } from 'react-native-elements';
+import { View, Text, FlatList, SafeAreaView, VirtualizedList } from 'react-native';
+import {  Icon, Avatar, Card, Divider } from 'react-native-elements';
 import { NavigationScreenProp } from 'react-navigation';
 import { styles } from './styles';
-import {RouteStackParamList} from '../../NavigationConfig/types'
+import {RouteStackParamList} from '../../NavigationConfig/types';
+import WalkerCard from '../WalkerCard/index';
+import { useNavigation } from '@react-navigation/native';
+import { walkers } from '../WalkerCard/data';
 
-export interface HomeScreenProps {
-  navigation: NavigationScreenProp<any,any>
+interface Walker {
+    id: number;
+    name: string;
+    avatar: string;
+    price: string;
+    description: string;
+    workZone: string;
+    countDogs: string;
+    
 };
 
-const list = [
-    {
-      name: 'Amy Farha',
-      avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-      subtitle: 'Vice President'
-    },
-    {
-      name: 'Chris Jackson',
-      avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-      subtitle: 'Vice Chairman'
-    },
-    {
-        name: 'Chris Jackson',
-        avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-        subtitle: 'Vice Chairman'
-      },
-      {
-        name: 'Chris Jackson',
-        avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-        subtitle: 'Vice Chairman'
-      },
-    //   {
-    //     name: 'Chris Jackson',
-    //     avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-    //     subtitle: 'Vice Chairman'
-    //   }, // more items
-    //   {
-    //     name: 'Chris Jackson',
-    //     avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-    //     subtitle: 'Vice Chairman'
-    //   },
-    //   {
-    //     name: 'Chris Jackson',
-    //     avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-    //     subtitle: 'Vice Chairman'
-    //   },
-    //   {
-    //     name: 'Chris Jackson',
-    //     avatar_url: 'http://www.graficaszamart.com/imprenta/wp-content/uploads/2015/08/Foto-perfil.jpg',
-    //     subtitle: 'Vice Chairman'
-    //   },
-];
-
-const HomeScreen = ({navigation}: RouteStackParamList<'HomeScreen'>) => {
+const HomeScreen = () => {
+    const [ state, setState ] = React.useState<any | typeof walkers>(null);
+    const navigation = useNavigation();
     return (
         <>
-            <View style={{alignItems:'center', flexDirection: 'row', justifyContent: 'space-around', flex: 1}}>
-                <View style={{alignItems: 'center'}}>
+            <View style={styles.viewIcons}>
+                <View style={styles.cardIcons}>
                     <Icon 
                         reverse
                         name='walking'
                         type='font-awesome-5'
-                        onPress={() => navigation.navigate('WalkerCard')}
+                        color= '#fc5185'
+                        onPress={() => setState(walkers)}
                         />
                     <Text>Walkers</Text>
                 </View>
-                <View style={{alignItems: 'center'}}>
+                <View style={styles.cardIcons}>
                     <Icon 
                         reverse
                         name='spa'
                         type='font-awesome-5'
+                        color= '#fc5185'
                         />
                     <Text>Spa & Hostel</Text>
                 </View>
             </View>
-            <View style={{flexDirection: 'row', justifyContent:'space-around', marginTop: 20, flex: 1}}>
+            <Divider />
+            <View style={styles.viewIcons}>
                 <Icon 
-                    name='star-half-alt'
+                    name='star'
                     type='font-awesome-5'
+                    color='#f8dc81'
                 />
                 <Icon 
                     name='heart'
                     type='font-awesome-5'
+                    color= 'red'
                 />
                 <Icon 
                     name='house-user'
                     type='font-awesome-5'
+                    color= '#00af91'
                 />
                 <Icon 
                     name='globe'
                     type='font-awesome-5'
+                    color='#51c2d5'
+                    onPress={() => alert('all')}
                 />
             </View>
+            <Divider />
             <View style={styles.container}>
-                {/* <ScrollView 
-                    contentContainerStyle={styles.scrollView} 
-                    showsVerticalScrollIndicator={false} 
-                    style={styles.scroll}
-                >
-                    {
-                        list.map((l, i) => (
-                            <ListItem key={i} bottomDivider containerStyle={styles.cards}>
-                                <Avatar source={{uri: l.avatar_url}} size='small' />
-                                <ListItem.Content >
-                                    <ListItem.Title style={{color: '#fff'}}>{l.name}</ListItem.Title>
-                                    <ListItem.Subtitle style={{color: '#fff'}}>{l.subtitle}</ListItem.Subtitle>
-                                </ListItem.Content>
-                            </ListItem>
-                        ))
-                    }
-                </ScrollView> */}
-                <SafeAreaView style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-                    <FlatList
-                        data={list}
-                        renderItem={({ item }) => (
-                            <Card containerStyle={styles.cards}>
-                                <Avatar source={{uri: item.avatar_url}} size='small' />
-                                    <Card.Title style={{color: '#fff'}}>{item.name}</Card.Title>
-                                    <Text style={{color: '#fff'}}>{item.subtitle}</Text>
-                            </Card>
-                        )}
-                    />
-                </SafeAreaView>
+                {
+                state ? (
+
+                    <SafeAreaView style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+                        <FlatList
+                            data={state}
+                            keyExtractor={(item: Walker) => item.id.toString()}
+                            showsVerticalScrollIndicator={false}
+                            renderItem={({ item }) => {
+                                return (<WalkerCard walker={item} />)
+                            }}
+                        />
+                    </SafeAreaView>
+                ) : null    
+                }
             </View>
-            {/* <View style={styles.footer}>
-                <Icon 
-                    reverse
-                    name='home'
-                    style={styles.icons}
-                    onPress={
-                        () => navigation.navigate('Drawer')
-                    }
-                    />
-                <Icon 
-                    reverse
-                    name='user-o'
-                    type= 'font-awesome'
-                    style={styles.icons}
-                    onPress={
-                        () => navigation.navigate('Drawer')
-                    }
-                    /> 
-            </View> */}
         </>
     )
 };
+
 
 export default HomeScreen;
