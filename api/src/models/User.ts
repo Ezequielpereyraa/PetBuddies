@@ -6,12 +6,10 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
       trim: true,
     },
     lastname: {
       type: String,
-      required: true,
       trim: true,
     },
     email: {
@@ -35,7 +33,6 @@ const UserSchema = new mongoose.Schema(
     },
     zona: {
       type: String,
-      required: true,
       trim: true,
     },
     dni: {
@@ -46,16 +43,24 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    favorites: {
+      // Arrays de ids de los walkers
+      type: Array,
+      ref: "User",
+    },
     role: {
       type: String,
       enum: ["Owner", "Walker", "Admin"],
       default: "Owner",
     },
+    fee: {
+      type: Number,
+    },
     CUIT: {
       type: String,
     },
     workZone: {
-      type: String,
+      type: Array,
     },
     workHours: {
       type: String,
@@ -63,17 +68,13 @@ const UserSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-  //   pets: [{ 
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Pet"
-  //  }]
+
     date: {
       type: String,
-      default: moment().format('L') + ' ' + moment().format('LTS')
-    }
-
+      default: moment().format("L") + " " + moment().format("LTS"),
+    },
   },
-  { timestamps:true, versionKey: false }
+  { timestamps: true, versionKey: false }
 );
 
 const User = mongoose.model("User", UserSchema);
