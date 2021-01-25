@@ -18,7 +18,7 @@ server.get("/", async (req, res) => {
 // Trae tanto al USER como a sus respectivas PET's
 server.get("/:id", async (req, res) => {
   try {
-    const owner = await User.findById(req.params.id);
+    const owner = await User.findById(req.params.id).select(["-favorites", "-CUIT", "-workHours", "-workZone", "-description", "-date", "-fee", "-role"]);
     const pets = await Pet.find({ ownerId: req.params.id });
     res.send({ owner, pets });
   } catch (error) {
@@ -52,6 +52,16 @@ server.put("/:id", async (req, res) => {
     res.send(err);
   }
 });
+
+server.get ("/:id/favorites", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const owner = await User.findById (id).select ("favorites");
+    res.send (owner);
+  } catch (err) {
+    console.log (err);
+  }
+})
 
 server.patch("/:id/favorites", async (req, res) => {
   const { id } = req.params;
