@@ -11,11 +11,24 @@ server.get("/", async (req, res) => {
   }
 });
 
-server.get("/:zone", async (req, res) => {
-  const { zone } = req.params;
+server.get("/:walkerId", async (req, res) => {
+  const { walkerId } = req.params;
+
   try {
-    const walkers = await User.find({ role: "Walker", workZone: zone });
-    res.send(walkers);
+    const walker = await User.findById(walkerId).select(["-role", "-favorites", "-date", "-password"]);
+    res.send(walker);
+  } catch (err) {
+    console.log(err);
+  }
+})
+
+server.get("/zone/:zone", async (req, res) => {
+  const zone: string = req.params.zone;
+
+  try {
+    const walkers = await User.find({ role: "Walker" }).select(["-role", "-favorites", "-date", "-password"]);
+    var filteredWalkers = walkers.filter((walker: { workZone: String[] }) => walker.workZone.includes(zone))
+    res.send(filteredWalkers);
   } catch (err) {
     res.send(err);
   }
