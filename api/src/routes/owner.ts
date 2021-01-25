@@ -82,7 +82,6 @@ server.delete("/:userId/favorites/:walkerId", async (req, res) => {
 
   try {
     const owner = await User.findById(userId);
-    console.log(typeof owner.favorites[2]._id);
     owner.favorites = owner.favorites.filter(
       (fav: { _id: string }) => String(fav._id) !== walkerId
     );
