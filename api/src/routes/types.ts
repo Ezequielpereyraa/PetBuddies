@@ -14,7 +14,7 @@ export interface ownerIt {
   workHours?: string;
   description?: string;
   date?: string;
-  _id: string;
+  _id?: string;
   fee?: number;
   favorites?: Array<Object>;
 }
