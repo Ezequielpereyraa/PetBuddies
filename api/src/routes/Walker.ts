@@ -1,7 +1,10 @@
 import express from "express";
 import User from "../models/User";
 const server = express.Router();
+const bcrypt = require("bcrypt");
+import { ownerIt } from "./types";
 
+// ESTA RUTA DEVUELVE TODOS LOS PASEADORES 
 server.get("/", async (req, res) => {
   try {
     const walkers = await User.find({ role: "Walker" });
@@ -11,6 +14,7 @@ server.get("/", async (req, res) => {
   }
 });
 
+// ESTA RUTA DEVUELVE LOS DATOS DE UN PASEADOR EN ESPECIFICO
 server.get("/:walkerId", async (req, res) => {
   const { walkerId } = req.params;
 
@@ -18,10 +22,11 @@ server.get("/:walkerId", async (req, res) => {
     const walker = await User.findById(walkerId).select(["-role", "-favorites", "-date", "-password"]);
     res.send(walker);
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 })
 
+// ESTA RUTA DEVUELVE PASEADORES POR ZONA
 server.get("/zone/:zone", async (req, res) => {
   const zone: string = req.params.zone;
 
@@ -34,9 +39,15 @@ server.get("/zone/:zone", async (req, res) => {
   }
 });
 
+// ESTA RUTA ES PARA REGISTRO DE UN WALKER 
+// A LA HORA DE AGREGAR NUEVOS USUARIOS VERIFICAR LA RESPUESTA AL TENER EMAIL DUPLICADO
 server.post("/", async (req, res) => {
+  const { password } = req.body;
   try {
-    const walker = await User.create(req.body);
+    const pass: string = bcrypt.hashSync(password, 10);
+    const walker:any = await User.create(req.body);
+    walker.role="Walker";
+    walker.password = pass;
     await walker.save();
     res.send(walker);
   } catch (err) {
@@ -44,6 +55,7 @@ server.post("/", async (req, res) => {
   }
 });
 
+// ESTA RUTA ES PARA EDITAR LOS DATOS DE UN PASEADOR
 server.put("/:id", async (req, res) => {
   const { id } = req.params;
 

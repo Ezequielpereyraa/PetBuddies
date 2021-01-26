@@ -2,7 +2,8 @@ import express from "express";
 import Pet from "../models/Pet";
 const server = express.Router();
 
-// Tener previamente el ID del OWNER
+// Tener previamente el ID del OWNER 
+// ESTA RUTA AGREGA UNA MASCOTA A UN OWNER
 server.post("/", async ( req, res ) => {
   try {
     const pet = await Pet.create(req.body);
@@ -13,6 +14,7 @@ server.post("/", async ( req, res ) => {
   }
 });
 
+// ESTA RUTA DEVUELVE TODAS LAS MASCOTAS 
 server.get("/", async ( req, res ) => {
   try {
     const pets = await Pet.find();
@@ -22,6 +24,8 @@ server.get("/", async ( req, res ) => {
   }
 });
 
+
+// ESTA RUTA DEVUELVE UNA MASCOTA SEGUN SU ID
 server.get("/:id", async( req, res ) => {
  try {
    const pet = await Pet.findById(req.params.id)
