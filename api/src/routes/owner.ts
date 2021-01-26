@@ -5,7 +5,7 @@ import { ownerIt } from "./types";
 const bcrypt = require("bcrypt");
 const server = express.Router();
 
-// Trae solo USER's
+// Trae solo Owner's
 server.get("/", async (req, res) => {
   try {
     const owners = await User.find({ role: "Owner" });
@@ -26,6 +26,8 @@ server.get("/:id", async (req, res) => {
   }
 });
 
+// Esta ruta es para el registro de usuario
+// A LA HORA DE AGREGAR NUEVOS USUARIOS VERIFICAR LA RESPUESTA AL TENER EMAIL DUPLICADO
 server.post("/", async (req, res) => {
   const { password } = req.body;
   try {
@@ -40,6 +42,7 @@ server.post("/", async (req, res) => {
   }
 });
 
+// Esta ruta es para editar a un usuario 
 server.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -53,6 +56,7 @@ server.put("/:id", async (req, res) => {
   }
 });
 
+// Esta ruta trae los paseadores favoritos de un usuario 
 server.get ("/:id/favorites", async (req, res) => {
   const { id } = req.params;
   try {
@@ -63,33 +67,40 @@ server.get ("/:id/favorites", async (req, res) => {
   }
 })
 
+// Esta ruta es para agregar walkers como favoritos a un usuario especifico por su id
 server.patch("/:id/favorites", async (req, res) => {
   const { id } = req.params;
   const { walkerId } = req.body;
   try {
     const walker = await User.findById(walkerId);
     const owner = await User.findById(id);
-    owner.favorites = [...owner.favorites, walker];
-    await owner.save();
-    res.send(owner);
+    let confirm:any = owner?.favorites.find((walker:any) => walker._id === walkerId)
+    if(!confirm){
+      owner.favorites = [...owner.favorites, walker];
+      await owner.save();
+     return res.send(owner);
+
+    }else{
+      res.send({msg:'Este paseador ya esta en tus favoritos!'})
+    }
   } catch (err) {
     console.log(err);
   }
 });
 
+// Esta ruta remueve un paseador favorito del usuario 
 server.delete("/:userId/favorites/:walkerId", async (req, res) => {
   const { userId, walkerId } = req.params;
 
   try {
     const owner = await User.findById(userId);
-    console.log(typeof owner.favorites[2]._id);
     owner.favorites = owner.favorites.filter(
       (fav: { _id: string }) => String(fav._id) !== walkerId
     );
     await owner.save();
     res.send(owner);
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 });
 
