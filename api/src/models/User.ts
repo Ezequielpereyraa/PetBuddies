@@ -68,11 +68,13 @@ const UserSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-
+    rating: {
+      type: Number
+    },
     date: {
       type: String,
       default: moment().format("L") + " " + moment().format("LTS"),
-    },
+    }
   },
   { timestamps: true, versionKey: false }
 );
