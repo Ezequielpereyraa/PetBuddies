@@ -18,7 +18,7 @@ server.get("/", async (req, res) => {
 // Trae tanto al USER como a sus respectivas PET's
 server.get("/:id", async (req, res) => {
   try {
-    const owner = await User.findById(req.params.id).select(["-favorites", "-CUIT", "-workHours", "-workZone", "-description", "-date", "-fee", "-role"]);
+    const owner = await User.findById(req.params.id).select(["-favorites", "-CUIT", "-workHours", "-workZone", "-description", "-date", "-fee", "-role", "-rating"]);
     const pets = await Pet.find({ ownerId: req.params.id });
     res.send({ owner, pets });
   } catch (error) {

@@ -74,10 +74,13 @@ const UserSchema = new mongoose.Schema(
     reveiewsReceived: {
       type: Number
     },
+    rating: {
+      type: Number
+    },
     date: {
       type: String,
       default: moment().format("L") + " " + moment().format("LTS"),
-    },
+    }
   },
   { timestamps: true, versionKey: false }
 );
