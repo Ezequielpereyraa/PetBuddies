@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.ts",
+    "start": "node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "postinstall": "npm run tsc",
+    "dev": "nodemon index.ts"
   },
   "author": "",
   "license": "ISC",
