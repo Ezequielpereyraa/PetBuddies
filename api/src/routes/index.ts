@@ -1,7 +1,7 @@
 import morgan from "morgan";
 import express from "express";
 import ownerRouter from "./owner";
-import walkerRouter from "./Walker";
+import walkerRouter from "./walker";
 import petRoute from "./petRoute";
 
 const app = express.Router();

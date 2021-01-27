@@ -68,6 +68,12 @@ const UserSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    walks: {
+      type: Number
+    },
+    reveiewsReceived: {
+      type: Number
+    },
     rating: {
       type: Number
     },

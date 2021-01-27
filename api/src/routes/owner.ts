@@ -8,7 +8,7 @@ const server = express.Router();
 // Trae solo Owner's
 server.get("/", async (req, res) => {
   try {
-    const owners = await User.find({ role: "Owner" });
+    const owners = await User.find({ role: "Owner" }) //.select("-favorites"); POSIBLE MEJORA
     res.send(owners);
   } catch (err) {
     res.send(err);
