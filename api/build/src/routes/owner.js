@@ -20,7 +20,7 @@ const server = express_1.default.Router();
 // Trae solo Owner's
 server.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const owners = yield User_1.default.find({ role: "Owner" });
+        const owners = yield User_1.default.find({ role: "Owner" }); //.select("-favorites"); POSIBLE MEJORA
         res.send(owners);
     }
     catch (err) {

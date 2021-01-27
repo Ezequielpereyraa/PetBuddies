@@ -71,6 +71,12 @@ const UserSchema = new mongoose_1.default.Schema({
     description: {
         type: String,
     },
+    walks: {
+        type: Number
+    },
+    reveiewsReceived: {
+        type: Number
+    },
     rating: {
         type: Number
     },

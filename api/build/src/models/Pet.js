@@ -46,7 +46,7 @@ const PetSchema = new mongoose_1.default.Schema({
     ownerId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         required: true,
-        ref: "User",
+        ref: "User"
     },
 }, { timestamps: true, versionKey: false });
 const Pet = mongoose_1.default.model("Pet", PetSchema);
