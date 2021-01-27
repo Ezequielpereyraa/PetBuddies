@@ -41,11 +41,11 @@ const WalkerCard: React.FC<Props> = ({ walker, userFavorites }) => {
                     checked={checked}
                     onPress={async () => {
                         if (!checked) {
-                            const result = await axios.patch(`http://localhost:3001/owners/600ae1c984ce6400985f4f7a/favorites`, { walkerId: walker._id })
+                            const result = await axios.patch(`https://henry-petbuddies.herokuapp.com/owners/600ae1c984ce6400985f4f7a/favorites`, { walkerId: walker._id })
                             return setChecked(true)
                         } else {
                             const result =
-                                await axios.delete(`http://localhost:3001/owners/600ae1c984ce6400985f4f7a/favorites/` + walker._id)
+                                await axios.delete(`https://henry-petbuddies.herokuapp.com/owners/600ae1c984ce6400985f4f7a/favorites/` + walker._id)
                             return setChecked(false)
                         }
 
@@ -84,8 +84,8 @@ const WalkerCard: React.FC<Props> = ({ walker, userFavorites }) => {
                 </View>
             </TouchableOpacity>
             <View style={styles.cardHeaderRate}>
+                <Text style={{marginRight: 5}}>{walker.rating}</Text>
                 <Icon name='star-o' type='font-awesome' size={15} color='green' underlayColor="red" />
-                <Text>3.7</Text>
             </View>
         </Card>
     )

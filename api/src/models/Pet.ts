@@ -43,7 +43,7 @@ const PetSchema = new mongoose.Schema(
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: "User"
     },
   },
   { timestamps: true, versionKey: false }
