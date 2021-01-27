@@ -68,7 +68,12 @@ const UserSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-
+    walks: {
+      type: Number
+    },
+    reveiewsReceived: {
+      type: Number
+    },
     date: {
       type: String,
       default: moment().format("L") + " " + moment().format("LTS"),
