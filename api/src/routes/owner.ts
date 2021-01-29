@@ -29,13 +29,9 @@ server.get("/:id", async (req, res) => {
 // Esta ruta es para el registro de usuario
 // A LA HORA DE AGREGAR NUEVOS USUARIOS VERIFICAR LA RESPUESTA AL TENER EMAIL DUPLICADO
 server.post("/", async (req, res) => {
-  const { password } = req.body;
   try {
-    const pass: string = bcrypt.hashSync(password, 10); // Hasheo de la contraseña
     const owner: any = await User.create(req.body); //pasan los del registro (Name, lastName, password, email, zona)
-    owner.password = pass;
     await owner.save();
-    // const prueba = bcrypt.compareSync(password, owner.password)
     res.send(owner);
   } catch (err) {
     res.json(err);
