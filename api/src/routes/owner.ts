@@ -8,8 +8,18 @@ const server = express.Router();
 // Trae solo Owner's
 server.get("/", async (req, res) => {
   try {
-    const owners = await User.find({ role: "Owner" }) //.select("-favorites"); POSIBLE MEJORA
+    const owners = await User.find({ role: "Owner" }); //.select("-favorites"); POSIBLE MEJORA
     res.send(owners);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+// Ruta para buscar owner por email
+server.get("/email/:email", async (req, res) => {
+  try {
+    const owners = await User.find({ email: req.params.email });
+    res.send(owners[0]._id);
   } catch (err) {
     res.send(err);
   }
@@ -18,7 +28,17 @@ server.get("/", async (req, res) => {
 // Trae tanto al USER como a sus respectivas PET's
 server.get("/:id", async (req, res) => {
   try {
-    const owner = await User.findById(req.params.id).select(["-favorites", "-CUIT", "-workHours", "-workZone", "-description", "-date", "-fee", "-role", "-rating"]);
+    const owner = await User.findById(req.params.id).select([
+      "-favorites",
+      "-CUIT",
+      "-workHours",
+      "-workZone",
+      "-description",
+      "-date",
+      "-fee",
+      "-role",
+      "-rating",
+    ]);
     const pets = await Pet.find({ ownerId: req.params.id });
     res.send({ owner, pets });
   } catch (error) {
@@ -32,13 +52,13 @@ server.post("/", async (req, res) => {
   try {
     const owner: any = await User.create(req.body); //pasan los del registro (Name, lastName, password, email, zona)
     await owner.save();
-    res.send(owner);
+    res.send(owner._id);
   } catch (err) {
     res.json(err);
   }
 });
 
-// Esta ruta es para editar a un usuario 
+// Esta ruta es para editar a un usuario
 server.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -52,16 +72,16 @@ server.put("/:id", async (req, res) => {
   }
 });
 
-// Esta ruta trae los paseadores favoritos de un usuario 
-server.get ("/:id/favorites", async (req, res) => {
+// Esta ruta trae los paseadores favoritos de un usuario
+server.get("/:id/favorites", async (req, res) => {
   const { id } = req.params;
   try {
-    const owner = await User.findById (id).select ("favorites");
-    res.send (owner);
+    const owner = await User.findById(id).select("favorites");
+    res.send(owner);
   } catch (err) {
-    console.log (err);
+    console.log(err);
   }
-})
+});
 
 // Esta ruta es para agregar walkers como favoritos a un usuario especifico por su id
 server.patch("/:id/favorites", async (req, res) => {
@@ -70,21 +90,22 @@ server.patch("/:id/favorites", async (req, res) => {
   try {
     const walker = await User.findById(walkerId);
     const owner = await User.findById(id);
-    let confirm:any = owner?.favorites.find((walker:any) => walker._id === walkerId)
-    if(!confirm){
+    let confirm: any = owner?.favorites.find(
+      (walker: any) => walker._id === walkerId
+    );
+    if (!confirm) {
       owner.favorites = [...owner.favorites, walker];
       await owner.save();
-     return res.send(owner);
-
-    }else{
-      res.send({msg:'Este paseador ya esta en tus favoritos!'})
+      return res.send(owner);
+    } else {
+      res.send({ msg: "Este paseador ya esta en tus favoritos!" });
     }
   } catch (err) {
     console.log(err);
   }
 });
 
-// Esta ruta remueve un paseador favorito del usuario 
+// Esta ruta remueve un paseador favorito del usuario
 server.delete("/:userId/favorites/:walkerId", async (req, res) => {
   const { userId, walkerId } = req.params;
 

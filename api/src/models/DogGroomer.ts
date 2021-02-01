@@ -9,7 +9,7 @@ const DogGroomer = new mongoose.Schema({
     trim: true,
   },
   photo: {
-    type: String,
+    type: Array,
     trim: true,
   },
   schedule: {
@@ -39,11 +39,6 @@ const DogGroomer = new mongoose.Schema({
   address: {
     type: String,
     trim: true,
-  },
-  ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "Owner",
   },
 });
 
