@@ -12,8 +12,11 @@ const DogGroomer = new mongoose.Schema({
     type: Array,
     trim: true,
   },
-  schedule: {
-    type: String,
+  workHours: {
+    type: String
+  },
+  workDays: {
+    type: String
   },
   services: {
     type: Array,
