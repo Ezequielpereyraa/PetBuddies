@@ -62,10 +62,7 @@ server.post("/", async (req, res) => {
 server.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const owner = await User.findByIdAndUpdate({ _id: id }, req.body, {
-      new: true,
-    });
-
+    const owner = await User.findByIdAndUpdate({ _id: id }, req.body, { new: true });
     res.send(owner);
   } catch (err) {
     res.send(err);
