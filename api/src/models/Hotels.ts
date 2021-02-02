@@ -21,6 +21,9 @@ const HotelSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    adsPics:{
+      type:Array
+    },
     fee: {
       type: Number,
       required: true,
