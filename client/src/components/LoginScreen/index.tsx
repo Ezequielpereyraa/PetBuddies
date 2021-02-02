@@ -5,14 +5,20 @@ import ModalUserFormScreen from '../ModalUserFormScreen/ModalUserFormScreen'
 import firebase from 'firebase';
 import * as Google from "expo-google-app-auth";
 import axios from 'axios';
-import { ANDROID_CLIENT_ID } from '@env';
+import { ANDROID_CLIENT_ID, IOS_CLIENT_ID } from '@env';
 import { storeData, getData  } from '../../AsyncStorage/index'
+
+interface state {
+  [key: string]: any
+}
+
 
 const LoginScreen = ({ navigation }: RouteStackParamList<'LoginScreen'>) => {
   const [userData, setUserData] = useState({
     email: "",
     password: ""
   })
+
   const retrieveStorage = async () =>{
     const id:string = await getData()
      if(id) navigation.navigate('SelectRol')
@@ -21,11 +27,12 @@ const LoginScreen = ({ navigation }: RouteStackParamList<'LoginScreen'>) => {
   useLayoutEffect(() => {
     retrieveStorage();
   }, [])
-  
+
   const signIn = async () => {
     try {
       const result = await Google.logInAsync({
         androidClientId: ANDROID_CLIENT_ID,
+        iosClientId: IOS_CLIENT_ID,
         scopes: ["profile", "email"]
       })
       if (result.type === "success") {
@@ -86,8 +93,10 @@ const LoginScreen = ({ navigation }: RouteStackParamList<'LoginScreen'>) => {
           <View style={styles.inputView} >
             <TextInput
               style={styles.inputText}
-              placeholder="Email"
-              placeholderTextColor="#ffff"
+              autoCorrect={false}
+              autoCapitalize={'none'}
+              placeholder="Email..."
+              placeholderTextColor="#e3b587"
               onChangeText={text => setUserData({ ...userData, email: text })} />
           </View>
           <View style={styles.inputView} >

@@ -12,10 +12,11 @@ import HotelCard from '../components/Hotel/HotelCard';
 import LoginScreen from '../components/LoginScreen';
 import { RootStackParamList } from './types';
 import HomeScreen from '../components/homeScreen';
+import BeatySpaScreen from '../components/BeautySpaScreen/BeautySpaScreen';
 import { Icon } from 'react-native-elements';
 import { useFonts, NunitoSans_400Regular } from '@expo-google-fonts/nunito-sans'
+import BeautySpaScreen from '../components/BeautySpaScreen/BeautySpaScreen'
 import SelectRol from '../components/SelectRol';
-
 
 /* 
     Para agregar una ruta tenemos que hacer lo siguiente:
@@ -103,6 +104,7 @@ export const Routes: React.FC = () => {
         <Screen name='SelectRol' component={SelectRol} options={{ headerShown: false }} />
         <Screen name='Tab' component={TabNavigation} options={() => ({headerLeft: null})} />
         <Screen name='WalkerCard' component={WalkerCard} />
+        <Screen name='BeautySpaScreen' component={BeatySpaScreen} options={{ headerShown: false }} />
         <Screen name='WalkerProfile' component={WalkerProfile} />
         <Screen name='HotelCard' component={HotelCard} />
         <Screen name='HotelProfile' component={HotelProfile} />

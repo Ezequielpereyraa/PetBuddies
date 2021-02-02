@@ -19,6 +19,7 @@ export type RootStackParamList = {
   Stack: undefined
   Tab: undefined;
   TabNavigation: undefined;
+  BeautySpaScreen:undefined;
   HotelCard: {
     hotel: hotel
   }

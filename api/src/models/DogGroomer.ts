@@ -9,10 +9,13 @@ const DogGroomer = new mongoose.Schema({
     trim: true,
   },
   photo: {
-    type: String,
+    type: Array,
     trim: true,
   },
-  schedule: {
+  workHours: {
+    type: String,
+  },
+  workDays: {
     type: String,
   },
   services: {
@@ -40,10 +43,25 @@ const DogGroomer = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
+  localidad: {
+    type: String,
+    trim: true,
+  },
+  provincia: {
+    type: String,
+    trim: true,
+  },
+  pais: {
+    type: String,
+    trim: true,
+  },
+  latitude: {
+    type: Number,
     required: true,
-    ref: "Owner",
+  },
+  longitude: {
+    type: Number,
+    required: true,
   },
 });
 

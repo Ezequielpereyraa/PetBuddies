@@ -9,6 +9,7 @@ import { useAppDispatch, RootState } from '../../redux/store';
 import { getWalkers } from '../../redux/walker/actions';
 import { getUserFavorites } from '../../redux/owner/actions';
 import { Walker } from '../../redux/walker/types';
+import { RouteStackParamList } from '../../NavigationConfig/types';
 import {
     useFonts,
     NunitoSans_400Regular,
@@ -20,13 +21,13 @@ import {
 } from '@expo-google-fonts/nunito-sans';
 import { getData } from '../../AsyncStorage';
 
-
 const lista: string[] = ['palermo', 'caballito', 'almagro', 'belgrano', 'saavedra', 'puerto madero', 'recoleta', 'villa crespo', 'boedo', 'colegiales', 'barrio norte'].sort();
 interface ModalChecks {
     [key: string]: boolean;
 }
 
 const HomeScreen = () => {
+
     const [state, setState] = React.useState<any | typeof walkers>(null);
     const [check, setCheck] = React.useState<boolean>(false);
     const [checked, setChecked] = React.useState<string | boolean>(false);
@@ -76,7 +77,8 @@ const HomeScreen = () => {
     };
 
     const renderComponent = (arr: any) => {
-        return (<SafeAreaView style={{ width: '100%', display: 'flex', justifyContent: 'center', flex: 1 }}>
+        return (
+        <SafeAreaView style={{ width: '100%', display: 'flex', justifyContent: 'center', flex: 1 }}>
             <FlatList
                 data={arr}
                 keyExtractor={(item: Walker) => item._id}
