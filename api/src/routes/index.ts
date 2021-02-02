@@ -4,6 +4,7 @@ import ownerRouter from "./owner";
 import walkerRouter from "./Walker";
 import petRoute from "./petRoute";
 import groomerRouter from "./groomRoute";
+import hotelRouter from "./hotelRouter"
 
 const app = express.Router();
 app.use(express.json()); // Body Parser
@@ -22,5 +23,6 @@ app.use("/owners", ownerRouter);
 app.use("/walkers", walkerRouter);
 app.use("/pets", petRoute);
 app.use("/groomer", groomerRouter);
+app.use("/hotels", hotelRouter)
 
 export default app;
