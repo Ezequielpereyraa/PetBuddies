@@ -31,11 +31,7 @@ server.get("/:id", async (req, res) => {
     const owner = await User.findById(req.params.id).select([
       "-favorites",
       "-CUIT",
-      "-workHours",
-      "-workZone",
-      "-description",
       "-date",
-      "-fee",
       "-role",
       "-rating",
     ]);
@@ -62,7 +58,9 @@ server.post("/", async (req, res) => {
 server.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const owner = await User.findByIdAndUpdate({ _id: id }, req.body, { new: true });
+    const owner = await User.findByIdAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
     res.send(owner);
   } catch (err) {
     res.send(err);
