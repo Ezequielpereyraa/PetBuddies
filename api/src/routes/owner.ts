@@ -77,7 +77,7 @@ server.get("/:id/favorites", async (req, res) => {
     const owner = await User.findById(id).select("favorites");
     res.send(owner);
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 });
 
@@ -100,7 +100,7 @@ server.patch("/:id/favorites", async (req, res) => {
       res.send({ msg: "Este paseador ya esta en tus favoritos!" });
     }
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 });
 
@@ -111,7 +111,7 @@ server.patch("/:id/favoritesHotels", async (req, res) => {
   try {
     const hotel = await Hotel.findById(hotelId);
     const owner = await User.findById(id);
-    let confirm: any = owner?.favorites.find(
+    let confirm: any = owner?.favoritesHotels.find(
       (hotel: any) => hotel._id === hotelId
     );
     if (!confirm) {
@@ -132,7 +132,7 @@ server.delete("/:userId/favoritesHotels/:hotelId", async (req, res) => {
 
   try {
     const owner = await User.findById(userId);
-    owner.favorites = owner.favorites.filter(
+    owner.favoritesHotels = owner.favoritesHotels.filter(
       (fav: { _id: string }) => String(fav._id) !== hotelId
     );
     await owner.save();
