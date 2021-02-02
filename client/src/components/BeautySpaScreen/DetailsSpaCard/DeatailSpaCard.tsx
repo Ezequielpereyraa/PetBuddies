@@ -26,11 +26,10 @@ function DetailsSpaCard(props: any) {
           },
           {
             text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
             style: "cancel",
           },
         ])
-      : Alert.alert("El establecimiento no posee WhatApp");
+      : Alert.alert("This place hasen't WhatsApp");
   }
 
   function openTel() {
@@ -44,11 +43,10 @@ function DetailsSpaCard(props: any) {
           },
           {
             text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
             style: "cancel",
           },
         ])
-      : Alert.alert("El establecimiento no posee Telefono");
+      : Alert.alert("This place hasen't telephone");
   }
 
   function openMail() {
@@ -62,11 +60,10 @@ function DetailsSpaCard(props: any) {
           },
           {
             text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
             style: "cancel",
           },
         ])
-      : Alert.alert("El establecimiento no posee WhatApp");
+      : Alert.alert("This place hasen't Email");
   }
 
   return (
@@ -78,10 +75,7 @@ function DetailsSpaCard(props: any) {
 
         <View /* buttonContainer */>
           <TouchableOpacity
-            style={{
-              ...styles.button,
-              backgroundColor: "rgba(255,115,160, 0.5)",
-            }}
+            style={styles.closeButton}
             onPress={() => {
               props.modalStatusChange();
             }}
