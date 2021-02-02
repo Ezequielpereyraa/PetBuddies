@@ -13,10 +13,10 @@ const DogGroomer = new mongoose.Schema({
     trim: true,
   },
   workHours: {
-    type: String
+    type: String,
   },
   workDays: {
-    type: String
+    type: String,
   },
   services: {
     type: Array,
@@ -54,6 +54,14 @@ const DogGroomer = new mongoose.Schema({
   pais: {
     type: String,
     trim: true,
+  },
+  latitude: {
+    type: Number,
+    required: true,
+  },
+  longitude: {
+    type: Number,
+    required: true,
   },
 });
 
