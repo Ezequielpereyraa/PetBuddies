@@ -21,8 +21,8 @@ const HotelSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    adsPics:{
-      type:Array
+    adsPics: {
+      type: Array,
     },
     fee: {
       type: Number,
@@ -67,9 +67,18 @@ const HotelSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    extras:{
-      type:Array
-    }
+    reviewsReceived: {
+      type: Number,
+    },
+    rating: {
+      type: Number,
+    },
+    petsLoved: {
+      type: Number,
+    },
+    extras: {
+      type: Array,
+    },
   },
   { timestamps: true, versionKey: false }
 );
