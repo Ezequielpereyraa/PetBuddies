@@ -43,6 +43,18 @@ const DogGroomer = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  localidad: {
+    type: String,
+    trim: true,
+  },
+  provincia: {
+    type: String,
+    trim: true,
+  },
+  pais: {
+    type: String,
+    trim: true,
+  },
 });
 
 const Groomer = mongoose.model("DogGroomer", DogGroomer);

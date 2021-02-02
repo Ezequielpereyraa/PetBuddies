@@ -34,5 +34,17 @@ server.post("/", async (req, res) => {
 });
 
 // Actualizar DogGroomer
+server.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const owner = await Groomer.findByIdAndUpdate({ _id: id }, req.body, {
+      new: true,
+    });
+
+    res.send(owner);
+  } catch (err) {
+    res.send(err);
+  }
+});
 
 export default server;
