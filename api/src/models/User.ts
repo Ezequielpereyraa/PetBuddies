@@ -47,6 +47,10 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       ref: "User",
     },
+    favoritesHotels:{
+      type: Array,
+      ref: "Hotel",
+    },
     role: {
       type: String,
       enum: ["Owner", "Walker", "Admin"],

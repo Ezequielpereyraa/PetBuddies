@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/User";
 import Pet from "../models/Pet";
+import Hotel from "../models/Hotels"
 import { ownerIt } from "./types";
 const bcrypt = require("bcrypt");
 const server = express.Router();
@@ -74,9 +75,10 @@ server.get("/:id/favorites", async (req, res) => {
     const owner = await User.findById(id).select("favorites");
     res.send(owner);
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 });
+
 
 // Esta ruta es para agregar walkers como favoritos a un usuario especifico por su id
 server.patch("/:id/favorites", async (req, res) => {
@@ -96,10 +98,47 @@ server.patch("/:id/favorites", async (req, res) => {
       res.send({ msg: "Este paseador ya esta en tus favoritos!" });
     }
   } catch (err) {
-    console.log(err);
+    res.send(err);
   }
 });
 
+// Esta ruta es para agregar hoteles favoritos al usuario
+server.patch("/:id/favoritesHotels", async (req, res) => {
+  const { id } = req.params;
+  const { hotelId } = req.body;
+  try {
+    const hotel = await Hotel.findById(hotelId);
+    const owner = await User.findById(id);
+    let confirm: any = owner?.favoritesHotels.find(
+      (hotel: any) => hotel._id === hotelId
+    );
+    if (!confirm) {
+      owner.favoritesHotels = [...owner.favoritesHotels, hotel];
+      await owner.save();
+      return res.send(owner);
+    } else {
+      res.send({ msg: "Este hotel ya esta en tus favoritos!" });
+    }
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+//RUTA PARA ELIMINAR UN HOTEL de FAVORITOS
+server.delete("/:userId/favoritesHotels/:hotelId", async (req, res) => {
+  const { userId, hotelId } = req.params;
+
+  try {
+    const owner = await User.findById(userId);
+    owner.favoritesHotels = owner.favoritesHotels.filter(
+      (fav: { _id: string }) => String(fav._id) !== hotelId
+    );
+    await owner.save();
+    res.send(owner);
+  } catch (err) {
+    res.send(err);
+  }
+});
 // Esta ruta remueve un paseador favorito del usuario
 server.delete("/:userId/favorites/:walkerId", async (req, res) => {
   const { userId, walkerId } = req.params;
