@@ -1,18 +1,17 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import { View, Text, ScrollView, SafeAreaView, FlatList } from 'react-native';
-import { Divider, Icon } from 'react-native-elements';
-import SpaCard from './SpaCard/spaCard';
-import { RouteStackParamList } from '../../NavigationConfig/types';
-import { useAppDispatch, RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
-import { getHairdressers } from '../../redux/Hairdressers/actions';
-import styles from './styles';
-import { getData } from '../../AsyncStorage/index';
+import * as React from "react";
+import { useState, useEffect } from "react";
+import { View, Text, ScrollView, SafeAreaView, FlatList } from "react-native";
+import { Divider, Icon } from "react-native-elements";
+import SpaCard from "./SpaCard/spaCard";
+import { RouteStackParamList } from "../../NavigationConfig/types";
+import { useAppDispatch, RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
+import { getHairdressers } from "../../redux/Hairdressers/actions";
+import styles from "./styles";
+import { getData } from "../../AsyncStorage/index";
 import { getOwnerFavGroomers } from "../../redux/owner/actions";
 
 function BeautySpaScreen() {
-
     const [id, setId] = useState ('');
     const [icon, setIcon] = React.useState<ModalChecks>({ peluquerias: true });
     const [state, setState] = useState<any> (null);
@@ -23,25 +22,25 @@ function BeautySpaScreen() {
         [key: string]: boolean;
     }
 
-    const retrieveStorage = async () => {
-        const user: string = await getData()
-        setId(user)
-    }
+  const retrieveStorage = async () => {
+    const user: string = await getData();
+    setId(user);
+  };
+
 
     const peluquerias = useSelector((state: RootState) => state.peluqueros.peluquerias);
     const userFavGroomers = useSelector(
         (state: RootState) => state.user.userFavGroomers
       );
 
-      console.log(userFavGroomers)
+  const dispatch = useAppDispatch();
 
-    const dispatch = useAppDispatch ();
+  const handleIcon = (name: string) => {
+    setIcon({
+      [name]: true,
+    });
+  };
 
-    const handleIcon = (name: string) => {
-        setIcon({
-          [name]: true,
-        });
-      };
 
     React.useEffect(() => {
         retrieveStorage();
@@ -124,12 +123,8 @@ function BeautySpaScreen() {
                         handleIcon("house");
                       }}
                 />
-                {/* <Icon
-                    name='globe'
-                    type='font-awesome-5'
-                    color='#51c2d5'
-                    onPress={() => alert('all')}
-                /> */}
+               
+
             </View>
             <Divider />
             <ScrollView style={{marginTop: 20, marginBottom: 60}}>
@@ -138,6 +133,7 @@ function BeautySpaScreen() {
             </ScrollView>
         </SafeAreaView >
     )
+
 }
 
 export default BeautySpaScreen;
