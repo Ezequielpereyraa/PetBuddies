@@ -51,6 +51,10 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       ref: "Hotel",
     },
+    favouritesGroomers: {
+      type: Array,
+      ref: 'DogGroomer'
+    },
     role: {
       type: String,
       enum: ["Owner", "Walker", "Admin"],
