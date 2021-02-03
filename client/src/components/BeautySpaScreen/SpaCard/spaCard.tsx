@@ -106,7 +106,7 @@ function SpaCard(props: any) {
       </View>
       <Modal
         animationType="slide"
-        transparent={false}
+        transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           modalStatusChange();

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Card, Image, Icon, CheckBox, Divider } from "react-native-elements";
-import { View, Text, TouchableOpacity, Alert, Linking } from "react-native";
+import { View, Text, TouchableOpacity, Alert, Linking, Platform } from "react-native";
 import { styles } from "./styles";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
@@ -64,6 +64,13 @@ function DetailsSpaCard(props: any) {
         },
       ])
       : Alert.alert("This place hasen't Email");
+  }
+
+  function openGps (lat:any, lng:any) {
+    
+    var scheme = Platform.OS === 'ios' ? 'maps:' : 'geo:';  
+    var url =  `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+    Linking.openURL(url);
   }
 
   return (
@@ -141,7 +148,7 @@ function DetailsSpaCard(props: any) {
         <View /* buttonGoContainer*/>
           <TouchableOpacity
             style={{ ...styles.button, backgroundColor: 'orange' }}
-            onPress={() => Alert.alert("hola")}
+            onPress={() => openGps(region.latitude,region.longitude)}
           >
             <Text style={styles.textButton}>Go</Text>
           </TouchableOpacity>

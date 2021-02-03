@@ -2,14 +2,17 @@ import { StyleSheet } from "react-native";
 import { StatusBar, Dimensions } from "react-native";
 import { withTheme } from "react-native-elements";
 
-// width: Dimensions.get('window').width,
-// height: Dimensions.get('window').height,
+const dimensions = {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+}
+
 export const styles = StyleSheet.create({
     containerAll: {
-        flex: 1,
         margin: 10,
         alignItems: "center",
-        height: "100%",
+        height: dimensions.height - 20,
+        width: dimensions.width - 20,
         backgroundColor: "rgba(150, 150, 129, 0.98)",
         borderRadius: 10,
         padding: 5,
@@ -79,38 +82,36 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         height: '100%',
         width: '100%',
-        padding:50
+        padding: 50
     },
     dataLeft: {
         justifyContent: 'center',
         alignItems: "center",
-        height:100,
-        color:'white'
+        height: 100,
+        color: 'white'
     },
 
     dataright: {
         justifyContent: 'center',
         alignItems: "center",
-        height:100,
+        height: 100,
     },
 
-    textData:{
-        fontSize:12,
-        padding:0,
-        color:'white'
+    textData: {
+        fontSize: 12,
+        padding: 0,
+        color: 'white'
     },
 
     mapContainer: {
-        position: 'relative',
         alignItems: "center",
         padding: 1,
-        marginTop: 15
+        marginTop: 15,
     },
 
     map: {
-
         width: "100%",
-        height: "100%"
+        height: "90%"
     },
 
     alignC: {
@@ -118,6 +119,7 @@ export const styles = StyleSheet.create({
     },
 
     footerContainer: {
-        padding: 100,
+        marginTop:100,
+        padding: 1,
     },
 });

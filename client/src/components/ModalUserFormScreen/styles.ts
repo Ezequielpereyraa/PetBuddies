@@ -1,17 +1,24 @@
 import { StyleSheet, } from 'react-native';
+import { StatusBar, Dimensions } from "react-native";
+
+const dimensions = {
+  width: Dimensions.get('window').width,
+height: Dimensions.get('window').height,
+}
 
 const styles = StyleSheet.create({
   keyboard: {
 
     flex: 1,
     flexGrow: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)'
+    backgroundColor: 'rgba(150, 150, 150, 0.8)',
 
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
-    marginVertical: 22
+    marginVertical: 22,
+    
   },
   modalView: {
     alignItems: 'center',
@@ -30,6 +37,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+
   },
 
   headContainer: {
