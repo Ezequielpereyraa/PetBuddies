@@ -64,6 +64,9 @@ const DogGroomer = new mongoose.Schema({
   },
   description: {
     type: String
+  },
+  logo: {
+    type: String
   }
 });
 
