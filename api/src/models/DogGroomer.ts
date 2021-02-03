@@ -22,8 +22,7 @@ const DogGroomer = new mongoose.Schema({
     type: Array,
   },
   reviews: {
-    type: Number,
-    require: false,
+    type: Number
   },
   phone: {
     type: Number,
@@ -63,6 +62,9 @@ const DogGroomer = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  description: {
+    type: String
+  }
 });
 
 const Groomer = mongoose.model("DogGroomer", DogGroomer);

@@ -44,7 +44,7 @@ export const Routes: React.FC = () => {
             };
 
             let icons: Icons;
-            icons = { Home: "walking", Hotel: 'bed' };
+            icons = { Home: "walking", Hotel: 'bed', Peluquerias: 'cut' };
 
             if (route.name === "Walkers") return null;
 
@@ -60,9 +60,8 @@ export const Routes: React.FC = () => {
         })}
       >
         <Tab.Screen name='Home' component={HomeScreen} />
-        {/* <Tab.Screen name='Profile' component={UserPannel} /> */}
         <Tab.Screen name='Hotel' component={HotelScreen} />
-
+        <Tab.Screen name='Peluquerias' component={BeautySpaScreen} />
       </Tab.Navigator>
     );
   };
