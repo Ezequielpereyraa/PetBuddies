@@ -67,6 +67,7 @@ function DetailsSpaCard(props: any) {
   }
 
   return (
+
     <View /* containerAll */ style={styles.containerAll}>
       <View /* headerContainer*/ style={styles.headersContainer}>
         <View /* title */>
@@ -109,12 +110,15 @@ function DetailsSpaCard(props: any) {
 
         <View /* dataContainer */ style={styles.dataContainer}>
 
-          <View /* dataLeft */>
-
+          <View /* dataLeft */style={styles.dataLeft}>
+            <Text style={{color:'white',fontSize:20,fontWeight:'bold'}}>Wait for you</Text>
           </View>
 
-          <View /* dataRight */>
-
+          <View /* dataRight */style={styles.dataright} >
+            <Text style={styles.textData}>{props.data.address}</Text>
+            <Text style={styles.textData}>{props.data.localidad}</Text>
+            <Text style={styles.textData}>{props.data.provincia}</Text>
+            <Text style={styles.textData}>{props.data.pais}</Text>
           </View>
         </View>
 
@@ -136,7 +140,7 @@ function DetailsSpaCard(props: any) {
         <Divider />
         <View /* buttonGoContainer*/>
           <TouchableOpacity
-            style={{...styles.button,backgroundColor:'orange'}}
+            style={{ ...styles.button, backgroundColor: 'orange' }}
             onPress={() => Alert.alert("hola")}
           >
             <Text style={styles.textButton}>Go</Text>

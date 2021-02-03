@@ -94,6 +94,7 @@ function SpaCard(props: any) {
           <View /* Ubicacion */ style={{ alignItems: "center" }}>
             <Text style={{ fontWeight: "bold" }}>Location</Text>
             <Text>{props.peluqueria.localidad}</Text>
+            <Text>{props.peluqueria.provincia}</Text>
           </View>
 
           <View /* reviews */ style={styles.reviewsContainer}>

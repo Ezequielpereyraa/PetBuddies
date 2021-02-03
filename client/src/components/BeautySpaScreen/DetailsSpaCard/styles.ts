@@ -75,20 +75,40 @@ export const styles = StyleSheet.create({
     dataContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
+        height: '100%',
+        width: '100%',
+        padding:50
+    },
+    dataLeft: {
+        justifyContent: 'center',
+        alignItems: "center",
+        height:100,
+        color:'white'
     },
 
+    dataright: {
+        justifyContent: 'center',
+        alignItems: "center",
+        height:100,
+    },
+
+    textData:{
+        fontSize:12,
+        padding:0,
+        color:'white'
+    },
 
     mapContainer: {
-        position:'relative',
+        position: 'relative',
         alignItems: "center",
         padding: 1,
-        marginTop:15
+        marginTop: 15
     },
 
     map: {
-        
+
         width: "100%",
         height: "100%"
     },
@@ -98,6 +118,6 @@ export const styles = StyleSheet.create({
     },
 
     footerContainer: {
-        padding: 1,
+        padding: 100,
     },
 });
