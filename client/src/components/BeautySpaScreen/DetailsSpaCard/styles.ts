@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { StatusBar, Dimensions } from "react-native";
+import { withTheme } from "react-native-elements";
 
 // width: Dimensions.get('window').width,
 // height: Dimensions.get('window').height,
@@ -9,7 +10,7 @@ export const styles = StyleSheet.create({
         margin: 10,
         alignItems: "center",
         height: "100%",
-        backgroundColor: "rgba(110, 129, 129, 0.98)",
+        backgroundColor: "rgba(150, 150, 129, 0.98)",
         borderRadius: 10,
         padding: 5,
         shadowColor: "#000",
@@ -42,9 +43,10 @@ export const styles = StyleSheet.create({
     textTitle: {
         fontSize: 25,
         fontWeight: "bold",
+        color: 'whitesmoke',
     },
     closeButton: {
-        backgroundColor: "rgba(255,115,160, 0.5)",
+        backgroundColor: "rgba(255,115,160, 0.99)",
         justifyContent: "center",
         borderRadius: 100,
         height: 35,
@@ -52,9 +54,9 @@ export const styles = StyleSheet.create({
         elevation: 1,
     },
     button: {
-        backgroundColor: "rgba(110,110,150, 0.8)",
+        backgroundColor: "rgba(180,170,150, 0.9)",
         justifyContent: "center",
-        borderRadius: 1,
+        borderRadius: 5,
         height: 40,
         width: 90,
         elevation: 1,
@@ -63,18 +65,32 @@ export const styles = StyleSheet.create({
         textAlign: "center",
         color: "white",
         fontSize: 15,
-        fontWeight: "bold",
     },
     bodyContainer: {
         marginTop: 1,
         height: "60%",
         width: "100%",
     },
+
+    dataContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+
     mapContainer: {
-        justifyContent: "center",
+        position:'relative',
         alignItems: "center",
-        alignContent: "center",
-        padding: 20,
+        padding: 1,
+        marginTop:15
+    },
+
+    map: {
+        
+        width: "100%",
+        height: "100%"
     },
 
     alignC: {
@@ -82,8 +98,6 @@ export const styles = StyleSheet.create({
     },
 
     footerContainer: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: 50,
+        padding: 1,
     },
 });

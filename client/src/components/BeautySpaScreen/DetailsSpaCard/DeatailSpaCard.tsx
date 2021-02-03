@@ -16,53 +16,53 @@ function DetailsSpaCard(props: any) {
   function openWhatsApp() {
     props.data.whatsapp
       ? Alert.alert("WhatsApp", "¿Want to chat?", [
-          {
-            text: "OK",
-            onPress: () => {
-              Linking.openURL(
-                `https://wa.me/${props.data.whatsapp}?text=Quiero mas Información`
-              );
-            },
+        {
+          text: "OK",
+          onPress: () => {
+            Linking.openURL(
+              `https://wa.me/${props.data.whatsapp}?text=Quiero mas Información`
+            );
           },
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-        ])
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ])
       : Alert.alert("This place hasen't WhatsApp");
   }
 
   function openTel() {
     props.data.phone
       ? Alert.alert("Phone", "¿Want to CALL?", [
-          {
-            text: "OK",
-            onPress: () => {
-              Linking.openURL(`tel:${props.data.phone}`);
-            },
+        {
+          text: "OK",
+          onPress: () => {
+            Linking.openURL(`tel:${props.data.phone}`);
           },
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-        ])
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ])
       : Alert.alert("This place hasen't telephone");
   }
 
   function openMail() {
     props.data.mail
       ? Alert.alert("Mail", "Want to send a MAIL?", [
-          {
-            text: "OK",
-            onPress: () => {
-              Linking.openURL(`mailito:${props.data.mail}`);
-            },
+        {
+          text: "OK",
+          onPress: () => {
+            Linking.openURL(`mailito:${props.data.mail}`);
           },
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-        ])
+        },
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+      ])
       : Alert.alert("This place hasen't Email");
   }
 
@@ -87,9 +87,10 @@ function DetailsSpaCard(props: any) {
 
       <View /* bodyContainer */ style={styles.bodyContainer}>
         <Divider />
+
         <View /* buttonsContainer */ style={styles.buttonsContainer}>
           <TouchableOpacity style={styles.button} onPress={() => openTel()}>
-            <Text style={styles.textButton}>Tel</Text>
+            <Text style={styles.textButton}>Call</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -103,9 +104,24 @@ function DetailsSpaCard(props: any) {
             <Text style={styles.textButton}>Email</Text>
           </TouchableOpacity>
         </View>
+
         <Divider />
+
+        <View /* dataContainer */ style={styles.dataContainer}>
+
+          <View /* dataLeft */>
+
+          </View>
+
+          <View /* dataRight */>
+
+          </View>
+        </View>
+
+        <Divider />
+
         <View /* mapContainer*/ style={styles.mapContainer}>
-          <MapView region={region} style={{ width: "80%", height: "80%" }}>
+          <MapView region={region} style={styles.map}>
             <Marker
               coordinate={{
                 latitude: region.latitude,
@@ -120,7 +136,7 @@ function DetailsSpaCard(props: any) {
         <Divider />
         <View /* buttonGoContainer*/>
           <TouchableOpacity
-            style={styles.button}
+            style={{...styles.button,backgroundColor:'orange'}}
             onPress={() => Alert.alert("hola")}
           >
             <Text style={styles.textButton}>Go</Text>

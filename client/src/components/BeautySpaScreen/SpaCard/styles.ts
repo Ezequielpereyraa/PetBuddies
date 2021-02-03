@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderRadius: 25,
+    borderRadius: 5,
     margin:5,
     padding: 20,
 
@@ -56,7 +56,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height: '100%'
+    height: '100%',
+    marginTop:12,
   },
   photoConatiner: {
     maxHeight: "100%",
@@ -68,6 +69,7 @@ export const styles = StyleSheet.create({
     height: 150,
     borderRadius: 10,
   },
+
   titleListContainer: {
     alignItems: 'center',
     backgroundColor: 'rgba(110,190,190, 0.5)',

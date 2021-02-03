@@ -12,7 +12,7 @@ import {
   Alert,
   Modal,
 } from "react-native";
-import { Icon } from "react-native-elements";
+import { Icon, Divider } from "react-native-elements";
 
 function SpaCard(props: any) {
   const renderItem = (item: any) => {
@@ -47,8 +47,10 @@ function SpaCard(props: any) {
               <Text style={styles.textButton}>Info</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </View>     
       </View>
+
+<Divider/>
 
       <View /* detailsConatiner */ style={styles.detailsContainer}>
         <View /* leftDetails */>
@@ -103,10 +105,10 @@ function SpaCard(props: any) {
       </View>
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent={false}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("se cierra el Modal.");
+          modalStatusChange();
         }}
       >
         <DetailsSpaCard
