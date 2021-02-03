@@ -245,7 +245,7 @@ const HomeScreen = () => {
                         }
 
                         <TouchableOpacity
-                            style={{ marginTop: 10, backgroundColor: '#ccc', borderRadius: 8, padding: 5, width: '70%' }}
+                            style={{ marginTop: 10, backgroundColor: 'red', borderRadius: 8, padding: 5, width: '70%' }}
                             onPress={() => {
                                 for (const prop in input) {
                                     if (input[prop]) {

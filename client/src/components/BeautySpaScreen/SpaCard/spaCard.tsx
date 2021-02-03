@@ -52,7 +52,7 @@ function SpaCard(props: any) {
 
       <View /* detailsConatiner */ style={styles.detailsContainer}>
         <View /* leftDetails */>
-          <View style={{ height: "100%", width: "100%" }} /* photoContainer */>
+          <View style={styles.photoConatiner} /* photoContainer */>
             <Image
               style={styles.photo}
               source={{
