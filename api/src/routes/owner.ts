@@ -33,7 +33,6 @@ server.get("/:id", async (req, res) => {
       "-favorites",
       "-CUIT",
       "-date",
-      "-role",
       "-rating",
     ]);
     const pets = await Pet.find({ ownerId: req.params.id });
