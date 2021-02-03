@@ -1,12 +1,13 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
+import { ListItem, Avatar, Icon } from "react-native-elements";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../AsyncStorage";
 import { RouteStackParamList } from "../../NavigationConfig/types";
 import { getOwner } from "../../redux/owner/actions";
 import { getWalkers } from "../../redux/walker/actions";
+import axios from "axios";
 
 interface State {
   name?: string;
@@ -19,6 +20,7 @@ interface State {
   workHours?: string;
   zona?: string;
   role?: string;
+  photo?: string;
 }
 
 const WalkerForm = ({ navigation }: RouteStackParamList<"WalkerForm">) => {
@@ -51,6 +53,20 @@ const WalkerForm = ({ navigation }: RouteStackParamList<"WalkerForm">) => {
 
   return (
     <ScrollView style={styles.container}>
+
+      <View style={styles.formImage}>
+        <Text style={styles.labelImage}>Upload / change profile pic</Text>
+        <View>
+        <Avatar
+          rounded
+          size="large"
+          source={user?.photo ? { uri: `${user?.photo}` } : require("../../images/logo.png")}
+          overlayContainerStyle={{ backgroundColor: "white" }}
+          onPress={() => alert("ir a editar perfil")}
+          />
+          </View>
+      </View>
+
       <View style={styles.formGroup}>
         <Text style={styles.label}>Name</Text>
         <TextInput
@@ -181,7 +197,23 @@ const styles = StyleSheet.create({
   formGroup: {
     borderColor: "#fff",
   },
+  formImage: {
+    borderColor: "#fff",
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   label: {
+    color: "#c98c70",
+    fontSize: 19,
+    textShadowColor: "#fff",
+    textShadowOffset: {
+      width: 0.4,
+      height: -1,
+    },
+    textShadowRadius: 1,
+  },
+  labelImage: {
+    marginBottom: 10,
     color: "#c98c70",
     fontSize: 19,
     textShadowColor: "#fff",
