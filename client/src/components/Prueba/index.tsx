@@ -1,24 +1,34 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
-import {Icon } from 'react-native-elements'
-import {RouteStackParamList} from '../../NavigationConfig/types'
-import {useDispatch} from 'react-redux';
-import {getWalkers} from '../../redux/walker/actions'
+import {Image, StyleSheet, Button, Text, View, Alert} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import * as firebase from 'firebase';
+import axios from 'axios';
 
+const Prueba = () => {
 
-const Prueba =({navigation}: RouteStackParamList<'Prueba'>)=> {
-    const dispatch = useDispatch();
-//
-    return (
+    const onChooseImagePress = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync();
+        if(!result.cancelled) {
+            uploadImage(result.uri, 'test-image')
+            .then(() => {
+                Alert.alert('success')
+            })
+            .catch(error => {
+                Alert.alert(error);
+            })
+        }
+    }
+    const uploadImage = async (uri:any, imageName:any) => {
+        const response = await fetch(uri);
+        const blob = await response.blob();
+
+        var ref = firebase.storage().ref().child('images/' + imageName);
+        return ref.put(blob);
+    }
+    return(
         <View>
-            <Text>Hello World!</Text>
-            <Icon name='star-o' type='font-awesome' onPress={() => console.log("hola")}/>
-            <Icon name='user-circle-o' type='font-awesome' onPress={() => navigation.navigate('UserPannel')}/>
-            <Button title='press me' onPress={() => dispatch(getWalkers([{firstName: 'Manuel'}]))}></Button>
-            <Icon name='heart-o' type='font-awesome' onPress={() => navigation.navigate('UserFormScreen')}/>
-            <Icon name='paw' type='font-awesome' onPress={() => navigation.navigate('LoginScreen')}/>
+            <Button title="Choose img" onPress={() => onChooseImagePress()}></Button>
         </View>
     )
 }
-
 export default Prueba;

@@ -19,6 +19,7 @@ import BeautySpaScreen from '../components/BeautySpaScreen/BeautySpaScreen'
 import SelectRol from '../components/SelectRol';
 import WalkerForm from "../components/WalkerForm";
 import {Image, View} from 'react-native'
+import Prueba from '../components/Prueba';
 
 export const Routes: React.FC = () => {
   let [fonts] = useFonts({ NunitoSans_400Regular });
@@ -45,7 +46,7 @@ export const Routes: React.FC = () => {
             };
 
             let icons: Icons;
-            icons = { Home: "walking", Hotel: 'bed', Peluquerias: 'cut' };
+            icons = { Home: "walking", Hotel: 'bed', Peluquerias: 'cut', prueba: 'help' };
 
             if (route.name === "Walkers") return null;
 
@@ -63,6 +64,7 @@ export const Routes: React.FC = () => {
         <Tab.Screen name='Home' component={HomeScreen} />
         <Tab.Screen name='Hotel' component={HotelScreen} />
         <Tab.Screen name='Peluquerias' component={BeautySpaScreen} />
+        <Tab.Screen name='prueba' component={Prueba}/>
       </Tab.Navigator>
     );
   };
