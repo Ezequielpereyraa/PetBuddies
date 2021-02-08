@@ -18,6 +18,7 @@ server.get("/:service/:id", async (req, res) => {
 });
 
 server.post("/", async (req,res)=>{
+  console.log(req.body)
   try {
     const review = await Review.create (req.body);
     await review.save();
