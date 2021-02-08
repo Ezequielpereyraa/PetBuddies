@@ -49,15 +49,15 @@ server.put("/:id", async (req, res) => {
   }
 });
 
-server.patch('/:userId/favourites/:groomerId', async (req, res) => {
+server.patch('/:userId/favorites/:groomerId', async (req, res) => {
   const { userId, groomerId } = req.params;
 
   try {
     const usuario = await User.findById (userId);
     const peluqueria = await Groomer.findById (groomerId);
-    let confirm: any = usuario?.favouritesGroomers.find((peluqueria: any) => peluqueria._id === groomerId);
+    let confirm: any = usuario?.favoritesGroomers.find((peluqueria: any) => peluqueria._id === groomerId);
     if (!confirm) {
-      usuario.favouritesGroomers = [...usuario.favouritesGroomers, peluqueria];
+      usuario.favoritesGroomers = [...usuario.favoritesGroomers, peluqueria];
       await usuario.save();
       return res.send(usuario);
     } else {
@@ -68,11 +68,11 @@ server.patch('/:userId/favourites/:groomerId', async (req, res) => {
   }
 })
 
-server.delete('/:userId/favourites/:groomerId', async (req, res) => {
+server.delete('/:userId/favorites/:groomerId', async (req, res) => {
   const { userId, groomerId } = req.params;
   try {
     const user = await User.findById(userId);
-    user.favouritesGroomers = user.favouritesGroomers.filter((fav: { _id: string }) => String(fav._id) !== groomerId);
+    user.favoritesGroomers = user.favoritesGroomers.filter((fav: { _id: string }) => String(fav._id) !== groomerId);
     await user.save();
     res.status(200).send(user);
   } catch (err) {
@@ -80,10 +80,10 @@ server.delete('/:userId/favourites/:groomerId', async (req, res) => {
   }
 })
 
-server.get('/:userId/favourites', async (req, res) => {
+server.get('/:userId/favorites', async (req, res) => {
   const { userId } = req.params;
   try {
-    const user = await User.findById(userId).select("favouritesGroomers");
+    const user = await User.findById(userId).select("favoritesGroomers");
     res.send(user)
   } catch (err) {
     res.status(200).send(err);

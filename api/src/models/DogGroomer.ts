@@ -8,8 +8,8 @@ const DogGroomer = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  photo: {
-    type: Array,
+  logo: {
+    type: String,
     trim: true,
   },
   workHours: {
@@ -18,21 +18,29 @@ const DogGroomer = new mongoose.Schema({
   workDays: {
     type: String,
   },
-  services: {
+  description: {
+    type: String,
+    trim: true
+  },
+  /* Fotos para el carousel */
+  adsPics: {
     type: Array,
   },
-  reviews: {
+  /* tarifa promedio */
+  fee: {
+    type: Number,
+  },
+  reviewsReceived: {
     type: Number
+  },
+  rating: {
+    type: Number,
   },
   phone: {
     type: Number,
     trim: true,
   },
-  whatsapp: {
-    type: Number,
-    trim: true,
-  },
-  mail: {
+  email: {
     type: String,
     required: true,
     trim: true,
@@ -42,7 +50,7 @@ const DogGroomer = new mongoose.Schema({
     type: String,
     trim: true,
   },
-  localidad: {
+  zone: {
     type: String,
     trim: true,
   },
@@ -62,13 +70,12 @@ const DogGroomer = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  description: {
-    type: String
+  /* De aca para abajo es propio del modelo. */
+  services: {
+    type: Array,
   },
-  logo: {
-    type: String
-  }
-});
+}, { timestamps: true, versionKey: false }
+);
 
 const Groomer = mongoose.model("DogGroomer", DogGroomer);
 

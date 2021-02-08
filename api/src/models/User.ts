@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema(
       type: Array,
       ref: "Hotel",
     },
-    favouritesGroomers: {
+    favoritesGroomers: {
       type: Array,
       ref: 'DogGroomer'
     },

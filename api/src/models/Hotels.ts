@@ -9,13 +9,16 @@ const HotelSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    photo: {
+    logo: {
       type: String,
       trim: true,
     },
-    schedule: {
+    workHours: {
       type: String,
       required: true,
+    },
+    workDays: {
+      type: String,
     },
     description: {
       type: String,
@@ -28,6 +31,61 @@ const HotelSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    reviewsReceived: {
+      type: Number,
+    },
+    rating: {
+      type: Number,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    zone: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    provincia: {
+      type: String,
+      trim: true,
+    },
+    pais: {
+      type: String,
+      trim: true,
+    },
+    latitude: {
+      type: Number
+    },
+    longitude: {
+      type: Number
+    },
+    /* De aca para abajo es propio del modelo. */
+    allowedNumber: {
+      // Cantidad de cupos disponibles
+      type: Number,
+    },
+    checkIn: {
+      type: Number,
+    },
+    checkOut: {
+      type: Number,
+    },
+    petsLoved: {
+      type: Number,
+    },
+    extras: {
+      type: Array,
+    },
     allowedPets: {
       type: Array,
       required: true,
@@ -39,52 +97,6 @@ const HotelSchema = new mongoose.Schema(
     requirement: {
       type: String,
     },
-    zone: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    celphone: {
-      type: String,
-      required: true,
-    },
-    allowedNumber: {
-      // Cantidad de cupos disponibles
-      type: Number,
-    },
-    checkIn: {
-      type: Number,
-    },
-    checkOut: {
-      type: Number,
-    },
-    email: {
-      type: String,
-      trim: true,
-      unique: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    reviewsReceived: {
-      type: Number,
-    },
-    rating: {
-      type: Number,
-    },
-    petsLoved: {
-      type: Number,
-    },
-    extras: {
-      type: Array,
-    },
-    latitude: {
-      type: Number
-    },
-    longitude: {
-      type: Number
-    }
   },
   { timestamps: true, versionKey: false }
 );
