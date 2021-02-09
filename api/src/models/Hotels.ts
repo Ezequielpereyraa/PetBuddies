@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import moment from "moment";
 import "moment/locale/es";
 
 const HotelSchema = new mongoose.Schema(
@@ -15,7 +14,7 @@ const HotelSchema = new mongoose.Schema(
     },
     workHours: {
       type: String,
-      required: true,
+      // required: true,
     },
     workDays: {
       type: String,
@@ -29,7 +28,7 @@ const HotelSchema = new mongoose.Schema(
     },
     fee: {
       type: Number,
-      required: true,
+      // required: true,
     },
     reviewsReceived: {
       type: Number,
@@ -39,21 +38,21 @@ const HotelSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type: String,
       trim: true,
-      unique: true,
+      // unique: true,
     },
     address: {
       type: String,
-      required: true,
+      // required: true,
     },
     zone: {
       type: String,
       trim: true,
-      required: true,
+      // required: true,
     },
     provincia: {
       type: String,
@@ -88,7 +87,7 @@ const HotelSchema = new mongoose.Schema(
     },
     allowedPets: {
       type: Array,
-      required: true,
+      // required: true,
     },
     foodInclude: {
       type: Boolean,

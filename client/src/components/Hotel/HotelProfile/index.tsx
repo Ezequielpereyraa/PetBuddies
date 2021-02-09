@@ -170,7 +170,7 @@ const HotelProfile = ({ navigation, route, }: RouteStackParamList<"HotelProfile"
                 />
               </View>
               <Text style={styles.userDescriptionText}>
-                {state.address + ", " + state.zone}
+                {state?.address + ", " + state?.zone}
               </Text>
             </View>
             <View style={styles.descriptionRow}>
