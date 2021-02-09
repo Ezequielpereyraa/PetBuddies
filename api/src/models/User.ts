@@ -42,6 +42,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    service: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DogGroomer" || "Hotel"
+    },
     favorites: {
       // Arrays de ids de los walkers
       type: Array,
