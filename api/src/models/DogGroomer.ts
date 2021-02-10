@@ -44,7 +44,6 @@ const DogGroomer = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   address: {
     type: String,
@@ -71,7 +70,7 @@ const DogGroomer = new mongoose.Schema({
     required: true,
   },
   /* De aca para abajo es propio del modelo. */
-  services: {
+  extras: {
     type: Array,
   },
 }, { timestamps: true, versionKey: false }
