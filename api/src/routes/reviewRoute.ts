@@ -8,7 +8,6 @@ const server = express.Router();
 
 server.get("/:service/:id", async (req, res) => {
   const { service, id } = req.params;
-  console.log(req.params)
   try {
     const review = await Review.find({ serviceType: service, reviewedId:id });
     res.send(review);
@@ -18,7 +17,6 @@ server.get("/:service/:id", async (req, res) => {
 });
 
 server.post("/", async (req,res)=>{
-  console.log(req.body)
   try {
     const review = await Review.create (req.body);
     await review.save();
