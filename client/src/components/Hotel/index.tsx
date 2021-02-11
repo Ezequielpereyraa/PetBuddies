@@ -75,6 +75,7 @@ const HotelScreen = () => {
     if (Object.keys(hotels).length === 0) {
       dispatch(getHotels());
     }
+
     dispatch(getOwnerFavHotels(id));
     handleList(hotels);
     setState(hotels);

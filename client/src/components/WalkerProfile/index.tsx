@@ -105,6 +105,7 @@ const WalkerProfile = ({
               >
                 <View style={styles.userRow}>
 
+
                   <Image style={styles.userImage} source={state?.photo ? state.photo[0] === 'h' ? { uri: `${state.photo}` } : { uri: `data:image/jpeg;base64,${state.photo}` } : require("../../images/logo.png")}
 
                   />
@@ -121,17 +122,28 @@ const WalkerProfile = ({
                     </Text>
                   </View>
                 </View>
-                <View style={styles.socialRow}>
-                  <Rating
-                    readonly
-                    type="custom"
-                    startingValue={state.rating}
-                    imageSize={30}
-                  />
-                  <Text style={[styles.ratingText, !theme && tema.darkText]}>
-                    {state.reveiewsReceived} califications
-                  </Text>
-                </View>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("ReviewsScreen", {
+                      hotelId: state._id,
+                      photo: state.logo,
+                      service: "Walker",
+                    })
+                  }
+                >
+                  <View style={styles.socialRow}>
+                    <Rating
+                      readonly
+                      type="custom"
+                      startingValue={state.rating}
+                      imageSize={30}
+                    />
+
+                    <Text style={styles.ratingText}>
+                      {state.reveiewsReceived} califications
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               </View>
               <Divider />
               {/* Description items */}
@@ -202,12 +214,29 @@ const WalkerProfile = ({
                   style={styles.overlay}
                 > */}
             </View>
-            {/* <View style={styles.overlay}>
-              <View>
-              <Image
-              style={styles.fotoverlay}
-              source={{ uri: `${state.photo}` }}
-              />
+          </View>
+          <Overlay
+            isVisible={modalVisible}
+            onBackdropPress={modalStatusChange}
+            style={styles.overlay}
+          >
+            <View>
+              <View style={styles.overlay}>
+                <View>
+                  <Image
+                    style={styles.fotoverlay}
+                    source={
+                      state?.photo
+                        ? state.photo[0] === "h"
+                          ? { uri: `${state.photo}` }
+                          : { uri: `data:image/jpeg;base64,${state.photo}` }
+                        : require("../../images/logo.png")
+                    }
+                  />
+                </View>
+                <Text style={styles.titleOverlay}>
+                  {state.name + " " + state.lastname}
+                </Text>
 
               </View>
               <Text style={styles.titleOverlay}>

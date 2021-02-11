@@ -31,7 +31,7 @@ const DogGroomer = new mongoose.Schema({
     type: Number,
   },
   reviewsReceived: {
-    type: Number
+    type: Array
   },
   rating: {
     type: Number,

@@ -82,8 +82,8 @@ const UserSchema = new mongoose.Schema(
     walks: {
       type: Number
     },
-    reveiewsReceived: {
-      type: Number
+    reviewsReceived: {
+      type: Array
     },
     rating: {
       type: Number
