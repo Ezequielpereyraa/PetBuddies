@@ -31,7 +31,7 @@ const HotelSchema = new mongoose.Schema(
       required: true,
     },
     reviewsReceived: {
-      type: Number,
+      type: Array,
     },
     rating: {
       type: Number,
@@ -62,10 +62,10 @@ const HotelSchema = new mongoose.Schema(
       trim: true,
     },
     latitude: {
-      type: Number
+      type: Number,
     },
     longitude: {
-      type: Number
+      type: Number,
     },
     /* De aca para abajo es propio del modelo. */
     allowedNumber: {
