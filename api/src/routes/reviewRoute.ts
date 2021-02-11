@@ -8,7 +8,7 @@ const server = express.Router();
 
 server.get("/:service/:id", async (req, res) => {
   const { service, id } = req.params;
-  
+  console.log(req.params)
   try {
     const review = await Review.find({ serviceType: service, reviewedId:id });
     res.send(review);
