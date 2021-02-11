@@ -33,9 +33,6 @@ server.post("/", async (req,res)=>{
       return acc + curr
     }, 0)
     var prom = (sum / copyOfReviewsReceived.length).toFixed (2);
-    console.log ('REQ BODY RATING', req.body.rating);
-    console.log ('SUM TOTAL', sum);
-    console.log ('PROMEDIO', prom);
 
     serviceToModify.reviewsReceived = serviceToModify.reviewsReceived.concat (req.body.rating);
     serviceToModify.rating = prom;
