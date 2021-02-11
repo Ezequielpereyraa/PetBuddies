@@ -88,6 +88,9 @@ const UserSchema = new mongoose.Schema(
     rating: {
       type: Number
     },
+    serviceType: {
+      type: String
+    },
     date: {
       type: String,
       default: moment().format("L") + " " + moment().format("LTS"),
