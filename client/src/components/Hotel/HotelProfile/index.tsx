@@ -24,7 +24,7 @@ const HotelProfile = ({
   navigation,
   route,
 }: RouteStackParamList<"HotelProfile">) => {
-  const [reviews, setReviews] = useState(route.params.reviews);
+  const [reviews, setReviews] = useState();
   const [state, setState] = React.useState<any>("");
   const [modalVisible, setModalVisible] = React.useState(false);
 
@@ -81,7 +81,7 @@ const HotelProfile = ({
                     imageSize={30}
                   />
                   <Text style={styles.ratingText}>
-                    {reviews.review.length} califications
+                    {reviews?.review.length} califications
                   </Text>
                 </View>
               </TouchableOpacity>
