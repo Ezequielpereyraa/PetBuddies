@@ -1,5 +1,6 @@
-  import * as React from "react";
+import * as React from "react";
 import { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   TouchableOpacity,
   Modal,
   Image,
+  Alert,
 } from "react-native";
 import { Divider, Icon } from "react-native-elements";
 import SpaCard from "./SpaCard/spaCard";
@@ -28,7 +30,7 @@ function BeautySpaScreen() {
   const [checked, setChecked] = React.useState<string | boolean>(false);
   const [check, setCheck] = React.useState<boolean>(false);
   const [list, setList] = React.useState<string[]>([]);
-  const theme = useSelector((state:RootState) => state.user.theme);
+  const theme = useSelector((state: RootState) => state.user.theme);
   interface ModalChecks {
     [key: string]: boolean;
   }
@@ -75,6 +77,21 @@ function BeautySpaScreen() {
     handleList(peluquerias);
     setState(peluquerias);
   }, [dispatch, peluquerias]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchUser = async () => {
+        try {
+          await dispatch(getHairdressers());
+          setState(peluquerias);
+        } catch (err) {
+          console.log (err);
+        }
+      };
+
+      fetchUser();
+    }, [])
+  );
 
   const renderComponent = (arr: any) => {
     return (

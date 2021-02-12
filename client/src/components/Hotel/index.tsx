@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -34,6 +35,8 @@ interface ModalChecks {
 }
 
 const HotelScreen = () => {
+
+  const dispatch = useAppDispatch();
   const [state, setState] = React.useState<any | typeof hotels>(null);
   const [check, setCheck] = React.useState<boolean>(false);
   const [checked, setChecked] = React.useState<string | boolean>(false);
@@ -43,24 +46,9 @@ const HotelScreen = () => {
   const theme = useSelector((state: RootState) => state.user.theme);
   const hotels = useSelector((state: RootState) => state.hotels.hotels);
   const [id, setId] = React.useState<string>("");
-
-  const handleList = (hotels: Hotel[]) => {
-    const arr: string[] = hotels.map((item) => item.zone);
-    const uniqueZones = arr.filter(
-      (item, index) => arr.indexOf(item) === index
-    );
-    return setList(uniqueZones);
-  };
-
-  const retrieveStorage = async () => {
-    const user: string = await getData();
-    setId(user);
-  };
-
   const userFavHotels = useSelector(
     (state: RootState) => state.user.userFavHotels
   );
-  const dispatch = useAppDispatch();
   let [fonts] = useFonts({
     NunitoSans_400Regular,
     NunitoSans_900Black_Italic,
@@ -70,16 +58,17 @@ const HotelScreen = () => {
     NunitoSans_300Light,
   });
 
-  React.useEffect(() => {
-    retrieveStorage();
-    if (Object.keys(hotels).length === 0) {
-      dispatch(getHotels());
-    }
-
-    dispatch(getOwnerFavHotels(id));
-    handleList(hotels);
-    setState(hotels);
-  }, [dispatch, hotels]);
+  const handleList = (hotels: Hotel[]) => {
+    const arr: string[] = hotels.map((item) => item.zone);
+    const uniqueZones = arr.filter(
+      (item, index) => arr.indexOf(item) === index
+    );
+    return setList(uniqueZones);
+  };
+  const retrieveStorage = async () => {
+    const user: string = await getData();
+    setId(user);
+  };
 
   const handleInput = (name: string) => {
     setInput({
@@ -116,6 +105,30 @@ const HotelScreen = () => {
     );
   };
 
+  React.useEffect(() => {
+    retrieveStorage();
+    if (Object.keys(hotels).length === 0) {
+      dispatch(getHotels());
+    }
+    dispatch(getOwnerFavHotels(id));
+    handleList(hotels);
+    setState(hotels);
+  }, [dispatch, hotels]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchUser = async () => {
+        try {
+          await dispatch(getHotels());
+          setState(hotels);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetchUser();
+    }, [])
+  );
+
   if (!fonts) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -126,6 +139,7 @@ const HotelScreen = () => {
       </View>
     );
   }
+
   return (
     <View style={[!theme ? tema.darkCard : tema.lightContainer]}>
       <Divider />

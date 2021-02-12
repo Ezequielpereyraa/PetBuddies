@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -15,9 +16,11 @@ import { RouteStackParamList } from "../../../NavigationConfig/types";
 import { Icon, Divider } from "react-native-elements";
 import { useSelector } from "react-redux";
 import { tema } from "../../../Theme/theme";
+import { getHairdressers } from "../../../redux/Hairdressers/actions";
 import { Rating } from "react-native-ratings";
 import axios from "axios";
 import InfoModal from "../../InfoModal";
+import { useAppDispatch, RootState } from "../../../redux/store";
 const { width } = Dimensions.get("screen");
 const imageW = width * 0.9;
 const imageH = imageW * 1.7;
@@ -26,28 +29,34 @@ const SpaProfile = ({
   navigation,
   route,
 }: RouteStackParamList<"SpaProfile">) => {
-  const theme = useSelector((state) => state.user.theme);
+  const theme = useSelector((state: RootState) => state.user.theme);
   const [state, setState] = React.useState<any>("");
-  const [thisRegion, setThisRegion] = React.useState<any>({
-    latitudeDelta: 0.005,
-    longitudeDelta: 0.005,
-    latitude: 0,
-    longitude: 0,
-  });
-
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [reviews, setReviews] = React.useState(route.params.reviews);
-
+  const pelus = useSelector(
+    (state: RootState) => state.peluqueros.peluquerias
+  );
   const modalStatusChange = () => {
     setModalVisible(!modalVisible);
   };
+
+  const dispatch = useAppDispatch();
 
   React.useEffect(() => {
     axios.get(`/groomer/${route.params.id}`).then((result) => {
       setState(result.data);
     });
+
+    /* const fetchUser = async () => {
+      try {
+        await dispatch(getHairdressers());
+        setState(pelus);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchUser(); */
   }, []);
-a
   if (!state) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -106,11 +115,17 @@ a
                   <Rating
                     readonly
                     type="custom"
-                    startingValue={reviews?.prom ? reviews.prom : 0}
+                    startingValue={
+                      route.params.mainData.rating
+                        ? route.params.mainData.rating
+                        : 0
+                    }
                     imageSize={30}
                   />
                   <Text style={[styles.ratingText, !theme && tema.darkText]}>
-                    {reviews?.review.length} califications
+                    {route.params.mainData.reviewsReceived &&
+                      route.params.mainData.reviewsReceived.length}{" "}
+                    califications
                   </Text>
                 </View>
               </TouchableOpacity>

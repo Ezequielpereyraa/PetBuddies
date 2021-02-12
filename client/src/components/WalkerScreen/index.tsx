@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -67,7 +68,7 @@ const WalkerScreen = () => {
     setId(idData);
   };
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     retrieveStorage();
     dispatch(getUserFavorites(id));
     handleList(walkers);
@@ -80,6 +81,21 @@ const WalkerScreen = () => {
       dispatch(getWalkers());
     }
   }, [dispatch, walkers]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchUser = async () => {
+        try {
+          await dispatch(getWalkers());
+          setState(walkers);
+        } catch (err) {
+          console.log (err);
+        }
+      };
+
+      fetchUser();
+    }, [])
+  );
 
   const handleInput = (name: string) => {
     setInput({

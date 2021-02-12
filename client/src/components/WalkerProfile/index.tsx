@@ -18,11 +18,13 @@ import { Rating } from "react-native-ratings";
 import axios from "axios";
 import InfoModal from "../InfoModal";
 import { tema } from "../../Theme/theme";
+import { getWalkers } from "../../redux/walker/actions";
 import { useSelector } from "react-redux";
 const { width, height } = Dimensions.get("screen");
 const imageW = width * 0.9;
 const imageH = imageW * 1.7;
-import {RootState} from '../../redux/store'
+import { RootState, useAppDispatch } from '../../redux/store'
+import { useFocusEffect } from "@react-navigation/native";
 
 const WalkerProfile = ({
   navigation,
@@ -36,39 +38,6 @@ const WalkerProfile = ({
       .get(`/walkers/${route.params.id}`)
       .then((result) => setState(result.data));
   }, []);
-  const [modalVisible, setModalVisible] = React.useState(false);
-
-  const modalStatusChange = () => {
-    setModalVisible(!modalVisible);
-  };
-
-  const renderLabel = () => {
-    return (
-      <View style={[styles.tabBar, styles.tabContainer]}>
-        <View>
-          <Text style={styles.tabLabelText}>$ {state.fee}</Text>
-          <Text style={styles.tabLabelNumber}>Per Walk</Text>
-        </View>
-        <View>
-          <Text style={styles.tabLabelText}>{state.workHours}</Text>
-          <Text style={styles.tabLabelNumber}>Working Hours</Text>
-        </View>
-        <View>
-          <Text style={styles.tabLabelText}>{state.walks || 0}</Text>
-          <Text style={styles.tabLabelNumber}>Walks completed</Text>
-        </View>
-        {/* <View>
-        <Text style={styles.tabLabelText}>
-          100%
-        </Text>
-        <Text style={styles.tabLabelNumber}>
-        Respuesta <br/>
-        a mensajes
-        </Text>
-        </View> */}
-      </View>
-    );
-  };
 
   if (!state) {
     return (
@@ -136,12 +105,12 @@ const WalkerProfile = ({
                     <Rating
                       readonly
                       type="custom"
-                      startingValue={state.rating}
+                      startingValue={route.params.mainData.rating}
                       imageSize={30}
                     />
 
                     <Text style={styles.ratingText}>
-                      {state.reveiewsReceived} califications
+                      {route.params.mainData.reviewsReceived.length} califications
                     </Text>
                   </View>
                 </TouchableOpacity>

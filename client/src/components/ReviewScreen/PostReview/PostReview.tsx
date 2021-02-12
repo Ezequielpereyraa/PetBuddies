@@ -17,6 +17,7 @@ import { getHairdressers } from "../../../redux/Hairdressers/actions";
 import { getHotels } from "../../../redux/hotels/actions";
 import { useSelector } from "react-redux";
 import { tema } from "../../../Theme/theme";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   service: string;
@@ -39,6 +40,7 @@ function PostReview({
   const [input, setInput] = useState("");
   const [rating, setRating] = useState(preRating);
   const theme = useSelector((state: RootState) => state.user.theme);
+  const navigation = useNavigation();
 
   const dispatch = useAppDispatch();
 
@@ -60,14 +62,14 @@ function PostReview({
     };
     axios
       .post("/reviews/", body)
+      .then(()=> Alert.alert("PetBuddies","Gracias por su comentario"))
       .then((res) => {
         getReviews();
         modalStatusChange();
-        if (service === "Hotel") dispatch(getHotels());
-        else if (service === "DogGroomer") dispatch(getHairdressers());
-        else if (service === "Walker") dispatch(getWalkers());
+        if (service === "Hotel") navigation.navigate("Hotel");
+        else if (service === "DogGroomer") navigation.navigate ("BeautySpaScreen")
+        else if (service === "Walker") navigation.navigate("Home");
       })
-      .then(()=> Alert.alert("PetBuddies","Gracias por su comentario"))
       .catch((err) => alert(err));
   }
 
