@@ -119,6 +119,7 @@ function BeautySpaScreen() {
       </SafeAreaView>
     );
   };
+
   if (!id) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -129,6 +130,7 @@ function BeautySpaScreen() {
       </View>
     );
   }
+
   return (
     <View style={[!theme ? tema.darkCard : tema.lightContainer]}>
       <Divider />

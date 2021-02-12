@@ -68,7 +68,7 @@ const SpaProfile = ({
 
     fetchUser();
   }, []);
-
+a
   if (!state) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
