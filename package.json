@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@types/redux": "^3.6.0",
-    "@types/redux-thunk": "^2.1.0",
-    "react-native-svg": "^12.1.0"
-  }
-}

@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -11,13 +11,15 @@ import {
   Modal,
 } from "react-native";
 import { RouteStackParamList } from "../../../NavigationConfig/types";
-import { Icon, Divider, Overlay } from "react-native-elements";
+import { Icon, Divider } from "react-native-elements";
 import { Rating } from "react-native-ratings";
 import axios from "axios";
 import { tema } from "../../../Theme/theme";
 import { useSelector } from "react-redux";
 import InfoModal from "../../InfoModal";
 import { styles } from "./styles";
+import { RootState } from "../../../redux/store";
+import { useFocusEffect } from "@react-navigation/native";
 const { width } = Dimensions.get("screen");
 const imageW = width * 0.9;
 const imageH = imageW * 1.7;
@@ -26,16 +28,8 @@ const HotelProfile = ({
   navigation,
   route,
 }: RouteStackParamList<"HotelProfile">) => {
-  const theme = useSelector((state) => state.user.theme);
+  const theme = useSelector((state: RootState) => state.user.theme);
   const [state, setState] = React.useState<any>("");
-  const [thisRegion, setThisRegion] = React.useState<any>({
-    latitudeDelta: 0.005,
-    longitudeDelta: 0.005,
-    latitude: 0,
-    longitude: 0,
-  });
-
-  const [reviews, setReviews] = useState();
 
   const [modalVisible, setModalVisible] = React.useState(false);
 
@@ -43,11 +37,13 @@ const HotelProfile = ({
     setModalVisible(!modalVisible);
   };
 
-  React.useEffect(() => {
-    axios.get(`/hotels/${route.params.id}`).then((result) => {
-      setState(result.data);
-    });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      axios.get(`/hotels/${route.params.id}`).then((result) => {
+        setState(result.data);
+      });
+    }, [])
+  );
 
   if (!state) {
     return (
@@ -58,10 +54,7 @@ const HotelProfile = ({
         />
       </View>
     );
-  }
-
-  console.log("---",route,"---");
-  
+  }  
   return (
     <ScrollView style={[styles.scroll, !theme && tema.darkCard]}>
       <View style={styles.container}>
@@ -101,7 +94,7 @@ const HotelProfile = ({
                   navigation.navigate("ReviewsScreen", {
                     hotelId: state._id,
                     photo: state.logo,
-                    reviews: reviews,
+                   /*  reviews: reviews, */
                     service: "Hotel",
                   })
                 }
@@ -110,11 +103,11 @@ const HotelProfile = ({
                   <Rating
                     readonly
                     type="custom"
-                    startingValue={route.params.mainData.rating ? route.params.mainData.rating : 0}
+                    startingValue={state.rating ? state.rating : 0}
                     imageSize={30}
                   />
                   <Text style={[styles.ratingText, !theme && tema.darkText]}>
-                    {route.params.mainData.reviewsReceived && route.params.mainData.reviewsReceived.length} califications
+                    {state.reviewsReceived && state.reviewsReceived.length} califications
                   </Text>
                 </View>
               </TouchableOpacity>
