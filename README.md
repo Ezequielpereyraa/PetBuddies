@@ -38,10 +38,13 @@ Para utilizar este proyecto tan solo se necesita tener actualizado expo y nodeJs
 - [Nicolas Diaz](https://github.com/Nicoglx)
 - [Santiago Espina](https://github.com/SantiEspina)
 - [Macarena Montes de Oca](https://github.com/macamontesdeoca)
-- [Ezequiel Pereira](https://github.com/Ezequielpereyraa)
+- [Ezequiel Pereyra](https://github.com/Ezequielpereyraa)
 - [Matías Racedo](https://github.com/matiasracedo)
 
 ## Preview 📄
 
 <p align='left'>
+   <img src='/Preview/petbuddies 2.jpg' >
 </p>
+<p>To see more images of this project until we upload the latest changes, click <a href="/Preview">here</a>.</p>
+<p>Para ver más imágenes de este proyecto hasta que carguemos los últimos cambios, haga clic <a href="/Preview">aquí</a>.</p>
